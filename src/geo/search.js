@@ -1,8 +1,8 @@
 import request from 'superagent'
 import QuickLRU from 'quick-lru'
-import { pelias } from '../../config'
 import { Agent } from 'http'
 
+const { pelias } = global.__vandelay_util_config
 const agent = new Agent({ keepAlive: true })
 const lru = new QuickLRU({ maxSize: 10000 })
 
@@ -35,6 +35,7 @@ const handleQuery = async (opts) => {
 }
 
 export default async ({ text }) => {
+  if (!pelias) throw new Error('Missing pelias configuration option')
   if (!text) throw new Error('Missing address text')
   const query = { text }
 

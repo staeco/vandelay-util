@@ -16,10 +16,9 @@ var _quickLru2 = _interopRequireDefault(_quickLru);
 
 var _http = require('http');
 
-var _config = require('../../config');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+const { pelias } = global.__vandelay_util_config;
 const lru = new _quickLru2.default({ maxSize: 10000 });
 const agent = new _http.Agent({ keepAlive: true });
 
@@ -32,6 +31,7 @@ const types = {
 };
 
 exports.default = async ({ type, start, end, optional }) => {
+  if (!pelias) throw new Error('Missing pelias configuration option');
   if (!types[type]) throw new Error(`Invalid type: ${type}`);
   if (!start || !start.coordinates) throw new Error('Missing start coordinates');
   if (!end || !end.coordinates) throw new Error('Missing end coordinates');
@@ -54,7 +54,7 @@ exports.default = async ({ type, start, end, optional }) => {
   // not in cache, fetch it
   let out;
   try {
-    const { body } = await _superagent2.default.get(_config.pelias.hosts.route).set('apikey', _config.pelias.key).type('json').agent(agent).query(q);
+    const { body } = await _superagent2.default.get(pelias.hosts.route).set('apikey', pelias.key).type('json').agent(agent).query(q);
     out = _polyline2.default.toGeoJSON(body.trip.legs[0].shape);
   } catch (err) {
     if (!optional) throw err;

@@ -10,16 +10,15 @@ var _quickLru = require('quick-lru');
 
 var _quickLru2 = _interopRequireDefault(_quickLru);
 
-var _config = require('../../config');
-
 var _http = require('http');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+const { pelias } = global.__vandelay_util_config;
 const agent = new _http.Agent({ keepAlive: true });
 const lru = new _quickLru2.default({ maxSize: 10000 });
 
-const makeRequest = opts => _superagent2.default.get(opts.host).type('json').agent(agent).set('apikey', _config.pelias.key).query(opts.query);
+const makeRequest = opts => _superagent2.default.get(opts.host).type('json').agent(agent).set('apikey', pelias.key).query(opts.query);
 
 const parseResponse = body => {
   const res = body.features[0];
@@ -45,6 +44,7 @@ const handleQuery = async opts => {
 };
 
 exports.default = async ({ address, city, region, country }) => {
+  if (!pelias) throw new Error('Missing pelias configuration option');
   if (!address) throw new Error('Missing address');
   const query = {
     locality: city,
@@ -58,7 +58,7 @@ exports.default = async ({ address, city, region, country }) => {
 
   const opts = {
     query,
-    host: _config.pelias.hosts.structured
+    host: pelias.hosts.structured
     // not in cache, fetch it
   };const out = handleQuery(opts);
 

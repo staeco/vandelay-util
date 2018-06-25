@@ -2,8 +2,8 @@ import request from 'superagent'
 import polyline from 'polyline'
 import QuickLRU from 'quick-lru'
 import { Agent } from 'http'
-import { pelias } from '../../config'
 
+const { pelias } = global.__vandelay_util_config
 const lru = new QuickLRU({ maxSize: 10000 })
 const agent = new Agent({ keepAlive: true })
 
@@ -15,6 +15,7 @@ const types = {
 }
 
 export default async ({ type, path, optional }) => {
+  if (!pelias) throw new Error('Missing pelias configuration option')
   if (!types[type]) throw new Error(`Invalid type: ${type}`)
   if (!path || !path.coordinates) throw new Error('Missing path')
   if (path.type !== 'LineString') throw new Error('Invalid path type, expected LineString')
