@@ -6,7 +6,7 @@ var _superagent = require('superagent');
 
 var _superagent2 = _interopRequireDefault(_superagent);
 
-var _polyline = require('polyline');
+var _polyline = require('@mapbox/polyline');
 
 var _polyline2 = _interopRequireDefault(_polyline);
 

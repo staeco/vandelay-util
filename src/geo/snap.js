@@ -1,5 +1,5 @@
 import request from 'superagent'
-import polyline from 'polyline'
+import polyline from '@mapbox/polyline'
 import QuickLRU from 'quick-lru'
 import { Agent } from 'http'
 
