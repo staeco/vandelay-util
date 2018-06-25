@@ -2,7 +2,7 @@
 
 exports.__esModule = true;
 
-var _turf = require('turf');
+var _turf = require('@turf/turf');
 
 var _turf2 = _interopRequireDefault(_turf);
 
