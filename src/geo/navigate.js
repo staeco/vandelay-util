@@ -16,12 +16,12 @@ const types = {
 }
 
 export default async ({ type, start, end, optional }) => {
-  if (!pelias) throw new Error('Missing pelias configuration option')
-  if (!types[type]) throw new Error(`Invalid type: ${type}`)
-  if (!start || !start.coordinates) throw new Error('Missing start coordinates')
-  if (!end || !end.coordinates) throw new Error('Missing end coordinates')
-  if (start.type !== 'Point') throw new Error('Invalid start type, expected Point')
-  if (end.type !== 'Point') throw new Error('Invalid end type, expected Point')
+  if (!pelias) throw new Error('Missing pelias configuration option (in geo.navigate)')
+  if (!types[type]) throw new Error(`Invalid type: ${type} (in geo.navigate)`)
+  if (!start || !start.coordinates) throw new Error('Missing start coordinates (in geo.navigate)')
+  if (!end || !end.coordinates) throw new Error('Missing end coordinates (in geo.navigate)')
+  if (start.type !== 'Point') throw new Error('Invalid start type, expected Point (in geo.navigate)')
+  if (end.type !== 'Point') throw new Error('Invalid end type, expected Point (in geo.navigate)')
 
   const path = {
     type: 'LineString',
@@ -44,6 +44,7 @@ export default async ({ type, start, end, optional }) => {
   let out
   try {
     const { body } = await request.get(pelias.hosts.route)
+      .retry(10)
       .set('apikey', pelias.key)
       .type('json')
       .agent(agent)

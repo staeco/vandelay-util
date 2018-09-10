@@ -15,10 +15,10 @@ const types = {
 }
 
 export default async ({ type, path, optional }) => {
-  if (!pelias) throw new Error('Missing pelias configuration option')
-  if (!types[type]) throw new Error(`Invalid type: ${type}`)
-  if (!path || !path.coordinates) throw new Error('Missing path')
-  if (path.type !== 'LineString') throw new Error('Invalid path type, expected LineString')
+  if (!pelias) throw new Error('Missing pelias configuration option (in geo.snap)')
+  if (!types[type]) throw new Error(`Invalid type: ${type} (in geo.snap)`)
+  if (!path || !path.coordinates) throw new Error('Missing path (in geo.snap)')
+  if (path.type !== 'LineString') throw new Error('Invalid path type, expected LineString (in geo.snap)')
 
   const q = {
     costing: types[type],
@@ -33,6 +33,7 @@ export default async ({ type, path, optional }) => {
   let out
   try {
     const { body } = await request.get(pelias.hosts.trace)
+      .retry(10)
       .type('json')
       .set('apikey', pelias.key)
       .agent(agent)

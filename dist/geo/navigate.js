@@ -31,12 +31,12 @@ const types = {
 };
 
 exports.default = async ({ type, start, end, optional }) => {
-  if (!pelias) throw new Error('Missing pelias configuration option');
-  if (!types[type]) throw new Error(`Invalid type: ${type}`);
-  if (!start || !start.coordinates) throw new Error('Missing start coordinates');
-  if (!end || !end.coordinates) throw new Error('Missing end coordinates');
-  if (start.type !== 'Point') throw new Error('Invalid start type, expected Point');
-  if (end.type !== 'Point') throw new Error('Invalid end type, expected Point');
+  if (!pelias) throw new Error('Missing pelias configuration option (in geo.navigate)');
+  if (!types[type]) throw new Error(`Invalid type: ${type} (in geo.navigate)`);
+  if (!start || !start.coordinates) throw new Error('Missing start coordinates (in geo.navigate)');
+  if (!end || !end.coordinates) throw new Error('Missing end coordinates (in geo.navigate)');
+  if (start.type !== 'Point') throw new Error('Invalid start type, expected Point (in geo.navigate)');
+  if (end.type !== 'Point') throw new Error('Invalid end type, expected Point (in geo.navigate)');
 
   const path = {
     type: 'LineString',
@@ -54,7 +54,7 @@ exports.default = async ({ type, start, end, optional }) => {
   // not in cache, fetch it
   let out;
   try {
-    const { body } = await _superagent2.default.get(pelias.hosts.route).set('apikey', pelias.key).type('json').agent(agent).query(q);
+    const { body } = await _superagent2.default.get(pelias.hosts.route).retry(10).set('apikey', pelias.key).type('json').agent(agent).query(q);
     out = _polyline2.default.toGeoJSON(body.trip.legs[0].shape);
   } catch (err) {
     if (!optional) throw err;

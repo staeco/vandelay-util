@@ -18,7 +18,7 @@ const { pelias } = global.__vandelay_util_config;
 const agent = new _http.Agent({ keepAlive: true });
 const lru = new _quickLru2.default({ maxSize: 10000 });
 
-const makeRequest = opts => _superagent2.default.get(opts.host).type('json').agent(agent).set('apikey', pelias.key).query(opts.query);
+const makeRequest = opts => _superagent2.default.get(opts.host).retry(10).type('json').agent(agent).set('apikey', pelias.key).query(opts.query);
 
 const parseResponse = body => {
   const res = body.features[0];
@@ -44,8 +44,8 @@ const handleQuery = async opts => {
 };
 
 exports.default = async ({ address, city, region, country }) => {
-  if (!pelias) throw new Error('Missing pelias configuration option');
-  if (!address) throw new Error('Missing address');
+  if (!pelias) throw new Error('Missing pelias configuration option (in geo.locate)');
+  if (!address) throw new Error('Missing address text (in geo.locate)');
   const query = {
     locality: city,
     region,

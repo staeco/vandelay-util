@@ -8,6 +8,7 @@ const lru = new QuickLRU({ maxSize: 10000 })
 
 const makeRequest = (opts) =>
   request.get(opts.host)
+    .retry(10)
     .type('json')
     .agent(agent)
     .set('apikey', pelias.key)
@@ -35,8 +36,8 @@ const handleQuery = async (opts) => {
 }
 
 export default async ({ text }) => {
-  if (!pelias) throw new Error('Missing pelias configuration option')
-  if (!text) throw new Error('Missing address text')
+  if (!pelias) throw new Error('Missing pelias configuration option (in geo.search)')
+  if (!text) throw new Error('Missing address text (in geo.search)')
   const query = { text }
 
   const lruKey = JSON.stringify(query)
