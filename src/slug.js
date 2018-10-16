@@ -1,7 +1,4 @@
-import slugify from 'slugify'
+import slugify from '@sindresorhus/slugify'
 
 export default (...v) =>
-  slugify(v.join('-'), {
-    replacement: '-',
-    lower: true
-  })
+  slugify(v.join(' '))
