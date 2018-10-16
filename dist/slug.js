@@ -8,6 +8,6 @@ var _slugify2 = _interopRequireDefault(_slugify);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = (...v) => (0, _slugify2.default)(v.join(' '));
+exports.default = (...v) => (0, _slugify2.default)(v.join(' ')).toLowerCase();
 
 module.exports = exports['default'];
