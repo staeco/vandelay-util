@@ -40,7 +40,7 @@ exports.default = async ({ type, start, end, optional }) => {
 
   const path = {
     type: 'LineString',
-    coordinates: [start, end]
+    coordinates: [start.coordinates, end.coordinates]
   };
   const q = {
     json: JSON.stringify({
