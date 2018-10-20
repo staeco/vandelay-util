@@ -9,4 +9,4 @@ var _camelcase2 = _interopRequireDefault(_camelcase);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = _camelcase2.default;
-module.exports = exports['default'];
+module.exports = exports.default;

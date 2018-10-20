@@ -9,4 +9,4 @@ var _phoneFormatter2 = _interopRequireDefault(_phoneFormatter);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = _phoneFormatter2.default.normalize;
-module.exports = exports['default'];
+module.exports = exports.default;

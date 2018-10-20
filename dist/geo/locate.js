@@ -68,4 +68,4 @@ exports.default = async ({ address, city, region, country }) => {
   return out;
 };
 
-module.exports = exports['default'];
+module.exports = exports.default;

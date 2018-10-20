@@ -14,4 +14,4 @@ exports.default = (config = {}) => {
   return (0, _requireDir2.default)(__dirname, { recurse: true });
 };
 
-module.exports = exports['default'];
+module.exports = exports.default;

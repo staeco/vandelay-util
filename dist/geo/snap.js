@@ -58,4 +58,4 @@ exports.default = async ({ type, path, optional }) => {
   return out;
 };
 
-module.exports = exports['default'];
+module.exports = exports.default;

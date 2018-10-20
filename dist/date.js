@@ -8,4 +8,4 @@ exports.default = v => {
   return isNaN(d) ? null : d;
 };
 
-module.exports = exports["default"];
+module.exports = exports.default;

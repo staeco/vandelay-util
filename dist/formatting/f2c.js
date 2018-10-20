@@ -16,4 +16,4 @@ exports.default = v => {
   return (0, _fahrenheitToCelsius2.default)(v);
 };
 
-module.exports = exports['default'];
+module.exports = exports.default;

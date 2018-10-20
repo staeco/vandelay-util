@@ -66,4 +66,4 @@ exports.default = async ({ type, start, end, optional }) => {
   return out;
 };
 
-module.exports = exports['default'];
+module.exports = exports.default;

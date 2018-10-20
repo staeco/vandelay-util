@@ -4,9 +4,9 @@ exports.__esModule = true;
 
 var _turf = require('@turf/turf');
 
-var _turf2 = _interopRequireDefault(_turf);
+var turf = _interopRequireWildcard(_turf);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-exports.default = _turf2.default;
-module.exports = exports['default'];
+exports.default = turf;
+module.exports = exports.default;

@@ -10,4 +10,4 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = (...v) => (0, _aguid2.default)(v.join('-'));
 
-module.exports = exports['default'];
+module.exports = exports.default;

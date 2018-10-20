@@ -15,4 +15,4 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = Object.assign({}, _validator2.default, {
   isPhone: _isPhone2.default
 });
-module.exports = exports['default'];
+module.exports = exports.default;

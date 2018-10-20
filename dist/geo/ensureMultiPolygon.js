@@ -13,4 +13,4 @@ const parsePolygon = feature => {
 
 exports.default = feature => parsePolygon(feature.geometry || feature);
 
-module.exports = exports['default'];
+module.exports = exports.default;

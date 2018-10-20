@@ -10,4 +10,4 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = str => _wkx2.default.Geometry.parse(str).toGeoJSON();
 
-module.exports = exports['default'];
+module.exports = exports.default;

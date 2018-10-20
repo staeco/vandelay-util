@@ -62,4 +62,4 @@ exports.default = async ({ text }) => {
   return out;
 };
 
-module.exports = exports['default'];
+module.exports = exports.default;

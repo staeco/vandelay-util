@@ -11,4 +11,4 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // switch to lon, lat for consistency with geojson
 exports.default = (lon, lat) => (0, _isSea2.default)(lat, lon);
 
-module.exports = exports['default'];
+module.exports = exports.default;
