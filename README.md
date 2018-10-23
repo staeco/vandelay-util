@@ -82,7 +82,13 @@ util.phone('+852 6123-6123') // +85261236123
 
 #### util.convert(value)
 
-Exposes convert-units, with additional handling of null and invalid values.
+Exposes convert-units, with additional handling of null and invalid values. For a full list of convertible units, see [this page](https://github.com/ben-ng/convert-units#supported-units).
+
+```js
+util.convert(null).from('m/h').to('km/h') // undefined
+util.convert('1').from('F').to('C') // -17.22222222222222
+util.convert(1).from('mi').to('km') // 1.6093439485009937
+```
 
 #### util.time(value[, timeZone])
 
@@ -118,7 +124,7 @@ util.geo.multi({
 
 #### util.geo.wk2JSON(value)
 
-Converts Well-Known-Text to GeoJSON
+Converts Well-Known-Text to GeoJSON - supports WKT/WKB/EWKT/EWKB/TWKB.
 
 ```js
 util.geo.wk2JSON('POINT(1 2)') // { type: 'Point', coordinates: [1, 2] }
