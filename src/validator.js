@@ -1,7 +1,3 @@
 import validator from 'validator'
-import isPhone from 'is-phone'
 
-export default {
-  ...validator,
-  isPhone
-}
+export default validator
