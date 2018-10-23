@@ -92,7 +92,13 @@ util.convert(1).from('mi').to('km') // 1.6093439485009937
 
 #### util.time(value[, timeZone])
 
-Exposes moment + moment-timezone, with additional handling of null and invalid values.
+Exposes moment + moment-timezone, with additional handling of null and invalid values. For a full list of time zones, see [this page](https://momentjs.com/timezone/).
+
+```js
+util.time(null) // undefined
+util.time('12/27/1993') // moment object
+util.time.tz('12/27/1993', 'America/New_York') // moment object
+```
 
 #### util.date(value)
 
@@ -107,6 +113,10 @@ util.date('12/27/1993 EST') // 1993-12-27T05:00:00.000Z
 #### util.geo.isSea(value)
 
 Returns true if the coordinate is in the sea. Value can be either `[ lon, lat ]` or a GeoJSON Point.
+
+```js
+util.isSea([ 0, 0 ]) // true
+```
 
 #### util.geo.multi(value)
 
