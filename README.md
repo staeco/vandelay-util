@@ -110,6 +110,17 @@ util.date(null) // undefined
 util.date('12/27/1993 EST') // 1993-12-27T05:00:00.000Z
 ```
 
+### util.number(value)
+
+Wrapper around number parsing that handles null and invalid values.
+
+```js
+util.number('$100.56') // 100.56
+util.number(100.56) // 100.56
+util.number('costs $100.56') // 100.56
+util.number('it is -100.56') // -100.56
+```
+
 #### util.geo.isSea(value)
 
 Returns true if the coordinate is in the sea. Value can be either `[ lon, lat ]` or a GeoJSON Point.
