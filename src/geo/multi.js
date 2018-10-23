@@ -5,8 +5,10 @@ export default (geometry) => {
   if (!geometry.coordinates) throw new Error('coordinates is required')
   const isSingle = geometry.type.indexOf('Multi') !== 0
   if (!isSingle) return geometry // is a multi, return early
+  const { type, coordinates, ...rest } = geometry
   return {
-    type: `Multi${geometry.type}`,
-    coordinates: [ geometry.coordinates ]
+    type: `Multi${type}`,
+    ...rest,
+    coordinates: [ coordinates ]
   }
 }

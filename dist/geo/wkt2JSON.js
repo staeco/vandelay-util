@@ -2,11 +2,12 @@
 
 exports.__esModule = true;
 
-var _validator = require('validator');
+var _wkx = require('wkx');
 
-var _validator2 = _interopRequireDefault(_validator);
+var _wkx2 = _interopRequireDefault(_wkx);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = _validator2.default;
+exports.default = str => _wkx2.default.Geometry.parse(str).toGeoJSON();
+
 module.exports = exports.default;
