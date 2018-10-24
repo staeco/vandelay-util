@@ -36,9 +36,13 @@ const parseResponse = body => {
   };
 };
 const handleQuery = async opts => {
-  const { body } = await makeRequest(opts);
-  if (!body || !body.features || !body.features[0]) return;
-  return parseResponse(body);
+  try {
+    const { body } = await makeRequest(opts);
+    if (!body || !body.features || !body.features[0]) return;
+    return parseResponse(body);
+  } catch (err) {
+    throw new Error(`${err.message || err} (in geo.search)`);
+  }
 };
 
 exports.default = async ({ text }) => {

@@ -40,7 +40,7 @@ export default async ({ type, path, optional }) => {
       .send(q)
     out = polyline.toGeoJSON(body.trip.legs[0].shape)
   } catch (err) {
-    if (!optional) throw err
+    if (!optional) throw new Error(`${err.message || err} (in geo.snap)`)
   }
   if (!out && optional) out = path
 

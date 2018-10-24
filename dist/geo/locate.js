@@ -18,7 +18,7 @@ const { pelias } = global.__vandelay_util_config;
 const agent = new _http.Agent({ keepAlive: true });
 const lru = new _quickLru2.default({ maxSize: 10000 });
 
-const makeRequest = opts => _superagent2.default.get(opts.host).retry(10).type('json').agent(agent).set('apikey', pelias.key).query(opts.query);
+const makeRequest = async opts => _superagent2.default.get(opts.host).retry(10).type('json').agent(agent).set('apikey', pelias.key).query(opts.query);
 
 const parseResponse = body => {
   const res = body.features[0];
@@ -37,10 +37,13 @@ const parseResponse = body => {
 };
 
 const handleQuery = async opts => {
-  const { body } = await makeRequest(opts);
-
-  if (!body || !body.features || !body.features[0]) return;
-  return parseResponse(body);
+  try {
+    const { body } = await makeRequest(opts);
+    if (!body || !body.features || !body.features[0]) return;
+    return parseResponse(body);
+  } catch (err) {
+    throw new Error(`${err.message || err} (in geo.locate)`);
+  }
 };
 
 exports.default = async ({ address, city, region, country }) => {
@@ -61,7 +64,6 @@ exports.default = async ({ address, city, region, country }) => {
     host: pelias.hosts.structured
     // not in cache, fetch it
   };const out = handleQuery(opts);
-
   if (!out) return;
   // put it in cache for later
   lru.set(lruKey, out);

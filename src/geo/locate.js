@@ -6,7 +6,7 @@ const { pelias } = global.__vandelay_util_config
 const agent = new Agent({ keepAlive: true })
 const lru = new QuickLRU({ maxSize: 10000 })
 
-const makeRequest = (opts) =>
+const makeRequest = async (opts) =>
   request.get(opts.host)
     .retry(10)
     .type('json')
@@ -31,10 +31,13 @@ const parseResponse = (body) => {
 }
 
 const handleQuery = async (opts) => {
-  const { body } = await makeRequest(opts)
-
-  if (!body || !body.features || !body.features[0]) return
-  return parseResponse(body)
+  try {
+    const { body } = await makeRequest(opts)
+    if (!body || !body.features || !body.features[0]) return
+    return parseResponse(body)
+  } catch (err) {
+    throw new Error(`${err.message || err} (in geo.locate)`)
+  }
 }
 
 export default async ({ address, city, region, country }) => {
@@ -57,7 +60,6 @@ export default async ({ address, city, region, country }) => {
   }
   // not in cache, fetch it
   const out = handleQuery(opts)
-
   if (!out) return
   // put it in cache for later
   lru.set(lruKey, out)

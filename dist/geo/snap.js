@@ -49,7 +49,7 @@ exports.default = async ({ type, path, optional }) => {
     const { body } = await _superagent2.default.get(pelias.hosts.trace).retry(10).type('json').set('apikey', pelias.key).agent(agent).send(q);
     out = _polyline2.default.toGeoJSON(body.trip.legs[0].shape);
   } catch (err) {
-    if (!optional) throw err;
+    if (!optional) throw new Error(`${err.message || err} (in geo.snap)`);
   }
   if (!out && optional) out = path;
 
