@@ -1,6 +1,6 @@
 {
   "name": "vandelay-util",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Grab bag of utilities for vandelay transform functions",
   "main": "dist/index.js",
   "keywords": [],
@@ -166,7 +166,7 @@
   },
   "dependencies": {
     "@mapbox/polyline": "^1.0.0",
-    "@sindresorhus/slugify": "^0.4.0",
+    "@sindresorhus/slugify": "^0.6.0",
     "@turf/turf": "^5.1.6",
     "aguid": "^2.0.0",
     "babel-runtime": "^6.3.19",
