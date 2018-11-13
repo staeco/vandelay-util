@@ -126,7 +126,7 @@ util.number('it is -100.56') // -100.56
 Returns true if the coordinate is in the sea. Value can be either `[ lon, lat ]` or a GeoJSON Point.
 
 ```js
-util.isSea([ 0, 0 ]) // true
+util.geo.isSea([ 0, 0 ]) // true
 ```
 
 #### util.geo.multi(value)
