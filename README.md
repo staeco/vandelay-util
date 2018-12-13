@@ -129,6 +129,19 @@ Returns true if the coordinate is in the sea. Value can be either `[ lon, lat ]`
 util.geo.isSea([ 0, 0 ]) // true
 ```
 
+#### util.geo.tz(point)
+
+Returns the timezone for a given point. Value returned can be used as the timezone for `util.date`. Value can be either `[ lon, lat ]` or a GeoJSON Point.
+
+```js
+util.geo.tz([ -118.250587 , 34.031179 ]) // America/Los_Angeles
+
+util.geo.tz({
+  type: 'Point',
+  coordinates: [ 121.456424, 31.224417 ]
+}) // Asia/Shanghai
+```
+
 #### util.geo.multi(value)
 
 Converts any given GeoJSON geometry to a `Multi` version. Values that are already a `Multi` geometry will be returned with no modifications.
