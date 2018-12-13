@@ -8,14 +8,5 @@ var _momentTimezone2 = _interopRequireDefault(_momentTimezone);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = (v, tz) => {
-  if (!tz) throw new Error('Missing timezone (in util.date)');
-  if (v == null) return;
-  const dv = new Date(v);
-  if (isNaN(dv)) return;
-  const d = _momentTimezone2.default.tz(dv, tz);
-  if (!d.isValid()) return;
-  return d.toISOString();
-};
-
+exports.default = _momentTimezone2.default;
 module.exports = exports.default;

@@ -90,24 +90,24 @@ util.convert('1').from('F').to('C') // -17.22222222222222
 util.convert(1).from('mi').to('km') // 1.6093439485009937
 ```
 
-#### util.time(value[, timeZone])
+#### util.moment(value)
 
 Exposes moment + moment-timezone, with additional handling of null and invalid values. For a full list of time zones, see [this page](https://momentjs.com/timezone/).
 
 ```js
-util.time(null) // undefined
-util.time('12/27/1993') // moment object
-util.time.tz('12/27/1993', 'America/New_York') // moment object
+util.moment(null) // undefined
+util.moment('12/27/1993') // moment object
+util.moment.tz('12/27/1993', 'America/New_York') // moment object
 ```
 
-#### util.date(value)
+#### util.date(value, timezone)
 
-Wrapper around JavaScript `new Date` that handles null and invalid values.
+Wrapper around moment.js `moment.tz(date, timezone)` that handles null and invalid values. Search timezones [here](https://momentjs.com/timezone/).
 
 ```js
-util.date('abc') // undefined
-util.date(null) // undefined
-util.date('12/27/1993 EST') // 1993-12-27T05:00:00.000Z
+util.date('abc', 'America/New_York') // undefined
+util.date(null, 'America/Los_Angeles') // undefined
+util.date('12/27/1993', 'America/New_York') // 1993-12-27T05:00:00.000Z
 ```
 
 ### util.number(value)
