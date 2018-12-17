@@ -189,5 +189,5 @@ Exposes [superagent](https://visionmedia.github.io/superagent/) with no modifica
 [npm-url]: https://npmjs.org/package/vandelay-util
 [npm-image]: http://img.shields.io/npm/v/vandelay-util.svg
 
-[travis-url]: https://travis-ci.org/contra/vandelay-util
-[travis-image]: https://travis-ci.org/contra/vandelay-util.png?branch=master
+[travis-url]: https://travis-ci.org/staeco/vandelay-util
+[travis-image]: https://travis-ci.org/staeco/vandelay-util.png?branch=master
