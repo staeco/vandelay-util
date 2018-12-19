@@ -59,7 +59,7 @@ const locateCity = async ({ city, region, country }) => {
     host: pelias.hosts.search
   }
   // not in cache, fetch it
-  const out = handleQuery(opts)
+  const out = await handleQuery(opts)
   if (!out) return
   // put it in cache for later
   lru.set(lruKey, out)
