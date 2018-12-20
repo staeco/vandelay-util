@@ -96,10 +96,10 @@ const locateIntersection = async ({ intersection, city, region, country }) => {
   const { bbox } = await locateCity({ city, region, country }) //get city's bounding box
 
   // use bounding box in searches
-  const streets = _.map(intersection.split(intersectionSplitExp), _.trim) // split street intersections on forward slash and comma
-  const waysData = await Promise.all(_.map(streets, async (street) => {
+  const streets = intersection.split(intersectionSplitExp).map(_.trim) // split street intersections on forward slash and comma
+  const waysData = await Promise.all(streets.map(async (street) => {
     const way = await locateWay({ street, bbox })
-    return _.uniq(_.flatten(_.map(way.elements, (e) => e.nodes)))
+    return _.uniq(_.flatten(way.elements.map((e) => e.nodes)))
   }))
   const intersectionNodeId = _.intersection(waysData[0], waysData[1])
   const node = await lookupNodeId(intersectionNodeId)
