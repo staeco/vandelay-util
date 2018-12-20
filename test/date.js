@@ -23,6 +23,6 @@ describe('date', () => {
     util.date(1000, 'America/New_York').should.equal('1970-01-01T00:00:01.000Z')
   })
   it('should return a valid date from number with timezone', async () => {
-    util.date('2014-06-01 12:00', 'America/New_York').should.equal('2014-06-01T16:00:00.000Z')
+    util.date('2014-06-01 12:00', 'America/New_York').should.equal('2014-06-01T19:00:00.000Z')
   })
 })
