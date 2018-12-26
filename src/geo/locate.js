@@ -3,7 +3,7 @@ import QuickLRU from 'quick-lru'
 import { Agent } from 'http'
 import geojson from './geojson'
 import capitalize from '../capitalize'
-import _ from '../_'
+import { trim, uniq, flatten, intersection } from 'lodash'
 
 const { pelias } = global.__vandelay_util_config
 const agent = new Agent({ keepAlive: true })
@@ -92,16 +92,16 @@ const lookupNodeId = async (nodeId) => {
 
 const intersectionSplitExp = /[/,]/
 
-const locateIntersection = async ({ intersection, city, region, country }) => {
+const locateIntersection = async ({ address, city, region, country }) => {
   const { bbox } = await locateCity({ city, region, country }) //get city's bounding box
 
   // use bounding box in searches
-  const streets = intersection.split(intersectionSplitExp).map(_.trim) // split street intersections on forward slash and comma
+  const streets = address.split(intersectionSplitExp).map(trim) // split street intersections on forward slash and comma
   const waysData = await Promise.all(streets.map(async (street) => {
     const way = await locateWay({ street, bbox })
-    return _.uniq(_.flatten(way.elements.map((e) => e.nodes)))
+    return uniq(flatten(way.elements.map((e) => e.nodes)))
   }))
-  const intersectionNodeId = _.intersection(waysData[0], waysData[1])
+  const intersectionNodeId = intersection(waysData[0], waysData[1])
   const node = await lookupNodeId(intersectionNodeId)
   return geojson(node)
 }
@@ -129,7 +129,7 @@ export default async ({ address, city, region, country }) => {
   try {
     out = await handleQuery(opts)
   } catch (err) {
-    out = await locateIntersection({ intersection: address, city, region, country })
+    out = await locateIntersection({ address, city, region, country })
   }
   if (!out) return
   // put it in cache for later
