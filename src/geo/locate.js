@@ -1,7 +1,7 @@
 import request from 'superagent'
 import QuickLRU from 'quick-lru'
 import { Agent } from 'http'
-import geojson from './geojson'
+import * as turf from '@turf/turf'
 import capitalize from '../capitalize'
 import { trim, uniq, flatten, intersection } from 'lodash'
 
@@ -103,7 +103,7 @@ const locateIntersection = async ({ address, city, region, country }) => {
   }))
   const intersectionNodeId = intersection(waysData[0], waysData[1])
   const node = await lookupNodeId(intersectionNodeId)
-  return geojson(node)
+  return turf.point(node.lon, node.lat)
 }
 
 export default async ({ address, city, region, country }) => {
