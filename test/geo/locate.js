@@ -1,7 +1,7 @@
 /*eslint no-console: 0*/
 import should from 'should'
 
-const locate = require('../../src/geo/locate.js')
+const locate = require('../../src/util/geo/locate.js')
 
 describe('geo#locate', function () {
   it('should exist', async () => {

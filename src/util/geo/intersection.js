@@ -1,7 +1,7 @@
 import request from 'superagent'
 import QuickLRU from 'quick-lru'
 import capitalize from '../capitalize'
-import handleQuery from './../../lib/pelias'
+import handleQuery from '../../lib/pelias'
 import * as turf from '@turf/turf'
 import { Agent } from 'http'
 import { trim, uniq, flatten, intersection as findIntersection } from 'lodash'

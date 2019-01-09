@@ -6,7 +6,7 @@ var _quickLru = require('quick-lru');
 
 var _quickLru2 = _interopRequireDefault(_quickLru);
 
-var _pelias = require('pelias');
+var _pelias = require('../../lib/pelias');
 
 var _pelias2 = _interopRequireDefault(_pelias);
 

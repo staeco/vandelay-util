@@ -1,7 +1,7 @@
 import should from 'should'
 import rewire from 'rewire'
 
-const intersection = rewire('../../src/geo/intersection.js')
+const intersection = rewire('../../src/util/geo/intersection.js')
 
 // get request cache so it can be manipulated
 const cityCache = intersection.__get__('cityLru')
