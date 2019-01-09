@@ -1,5 +1,5 @@
 import QuickLRU from 'quick-lru'
-import handleQuery from './pelias'
+import handleQuery from './../../lib/pelias'
 
 const { pelias } = global.__vandelay_util_config
 const lru = new QuickLRU({ maxSize: 10000 })
