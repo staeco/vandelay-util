@@ -1,7 +1,7 @@
 /*eslint no-console: 0*/
 
 import should from 'should'
-import util from '../src'
+import util from '../src/util'
 
 describe('util', () => {
   it('should exist', async () => {

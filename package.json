@@ -23,7 +23,8 @@
     "clean": "rimraf dist",
     "lint": "eslint src test",
     "lint:fix": "eslint src test --fix",
-    "test": "npm run-script lint && mocha --require babel-register --recursive --reporter spec"
+    "test": "npm run-script lint && mocha --require babel-register --recursive --reporter spec",
+    "test:debug": "mocha --inspect --require babel-register --recursive --reporter spec"
   },
   "devDependencies": {
     "babel-cli": "^6.4.0",
@@ -39,6 +40,7 @@
     "eslint-plugin-babel": "^5.1.0",
     "eslint-plugin-mocha": "^5.0.0",
     "mocha": "^5.0.0",
+    "rewire": "^4.0.1",
     "rimraf": "^2.5.0",
     "should": "^13.0.0"
   },

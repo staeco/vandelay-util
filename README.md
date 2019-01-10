@@ -164,6 +164,24 @@ Converts Well-Known-Text to GeoJSON - supports WKT/WKB/EWKT/EWKB/TWKB.
 util.geo.wk2JSON('POINT(1 2)') // { type: 'Point', coordinates: [1, 2] }
 ```
 
+#### util.geo.intersection({ intersection, city, region, country })
+
+Returns a geopoint for an intersection. For example:
+
+util.geo.intersection({
+  intersection: '12th Ave./Hammond St.',
+  city: 'Lost Wages',
+  region: 'NV',
+  country: 'USA'
+})
+
+util.geo.intersection({
+  intersection: '24th Ave., Avery St.',
+  city: 'Lost Wages',
+  region: 'NV',
+  country: 'USA'
+})
+
 #### util.geo.locate({ address, city, region, country })
 #### util.geo.search({ text })
 #### util.geo.snap({ type, path, optional })
