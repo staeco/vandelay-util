@@ -1,6 +1,6 @@
 {
   "name": "vandelay-util",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "Grab bag of utilities for vandelay transform functions",
   "main": "dist/index.js",
   "keywords": [],
@@ -168,7 +168,7 @@
   },
   "dependencies": {
     "@mapbox/polyline": "^1.0.0",
-    "@sindresorhus/slugify": "^0.6.0",
+    "@sindresorhus/slugify": "^0.8.0",
     "@turf/turf": "^5.1.6",
     "aguid": "^2.0.0",
     "babel-runtime": "^6.3.19",
@@ -180,10 +180,10 @@
     "moment-timezone": "^0.5.17",
     "numeral": "^2.0.6",
     "phone": "^2.2.0",
-    "quick-lru": "^1.1.0",
+    "quick-lru": "^2.0.0",
     "require-dir": "^1.0.0",
     "simplify-geojson": "^1.0.3",
-    "superagent": "^3.5.2",
+    "superagent": "^4.0.0",
     "validator": "^10.2.0",
     "wkx": "^0.4.5"
   }
