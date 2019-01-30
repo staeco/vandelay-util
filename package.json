@@ -1,6 +1,6 @@
 {
   "name": "vandelay-util",
-  "version": "3.2.1",
+  "version": "3.2.2",
   "description": "Grab bag of utilities for vandelay transform functions",
   "main": "dist/index.js",
   "keywords": [],
@@ -23,7 +23,7 @@
     "clean": "rimraf dist",
     "lint": "eslint src test",
     "lint:fix": "eslint src test --fix",
-    "test": "npm run-script lint && mocha --require babel-register --recursive --reporter spec",
+    "test": "mocha --require babel-register --recursive --reporter spec && npm run-script lint",
     "test:debug": "mocha --inspect --require babel-register --recursive --reporter spec"
   },
   "devDependencies": {

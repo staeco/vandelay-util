@@ -156,6 +156,20 @@ util.geo.multi({
 })
 ```
 
+#### util.geo.simplify(value)
+
+Simplifies any given GeoJSON geometry to the precision of a meter. Values that do not need simplification will be returned with no modifications.
+
+```js
+util.geo.simplify({
+  type: 'Polygon',
+  coordinates: [
+    [ [ 100.0, 0.0 ], [ 101.0, 0.0 ], [ 101.0, 1.0 ], [ 100.0, 1.0 ], [ 100.0, 0.0 ] ],
+    [ [ 100.2, 0.2 ], [ 100.8, 0.2 ], [ 100.8, 0.8 ], [ 100.2, 0.8 ], [ 100.2, 0.2 ] ]
+  ]
+})
+```
+
 #### util.geo.wk2JSON(value)
 
 Converts Well-Known-Text to GeoJSON - supports WKT/WKB/EWKT/EWKB/TWKB.
