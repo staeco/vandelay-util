@@ -1,4 +1,5 @@
 import { simplify } from '@turf/turf'
+import { isEqual } from 'lodash'
 
 // 1 = 69 miles
 // 0.001 = 1 city block
@@ -8,12 +9,13 @@ import { simplify } from '@turf/turf'
 export default (geometry, { tolerance=0.00001 }={}) => {
   if (geometry == null) return
   geometry = geometry.geometry || geometry
-  if (!geometry.type) throw new Error('type is required')
-  if (!geometry.coordinates) throw new Error('coordinates is required')
-
-  const isSingle = geometry.type.indexOf('Multi') !== 0
-  if (!isSingle) return geometry // is a multi, return early
+  if (geometry == null) return
   const { type, coordinates, ...rest } = geometry
+  if (!type) throw new Error('type is required')
+  if (!coordinates) throw new Error('coordinates is required')
+  if (type === 'LineString' && coordinates.length === 2 && isEqual(coordinates[0], coordinates[1])) {
+    throw new Error('Invalid LineString! Only two coordinates that are identical.')
+  }
   const res = simplify(geometry, { tolerance })
   return {
     type,
