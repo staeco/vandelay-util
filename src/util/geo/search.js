@@ -35,6 +35,9 @@ const handleQuery = async (opts) => {
     if (!body || !body.features || !body.features[0]) return
     return parseResponse(body)
   } catch (err) {
+    if (err.response && err.response.body && err.response.body.error) {
+      throw new Error(`${err.response.body.error} (in geo.search)`)
+    }
     throw new Error(`${err.message || err} (in geo.search)`)
   }
 }
