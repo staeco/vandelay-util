@@ -51,7 +51,12 @@ export default async ({ type, start, end, optional }) => {
       .query(q)
     out = polyline.toGeoJSON(body.trip.legs[0].shape)
   } catch (err) {
-    if (!optional) throw new Error(`${err.message || err} (in geo.navigate)`)
+    if (!optional) {
+      if (err.response && err.response.body && err.response.body.error) {
+        throw new Error(`${err.response.body.error} (in geo.navigate)`)
+      }
+      throw new Error(`${err.message || err} (in geo.navigate)`)
+    }
   }
   if (!out && optional) out = path
 
