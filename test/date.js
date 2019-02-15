@@ -17,7 +17,13 @@ describe('date', () => {
     should.not.exist(util.date('abc', 'America/New_York'))
   })
   it('should return a valid date from string', async () => {
-    util.date('12/27/1993', 'America/Los_Angeles').should.equal('1993-12-27T05:00:00.000Z')
+    // PST
+    util.date('12/27/1993', 'America/Los_Angeles').should.equal('1993-12-27T08:00:00.000Z')
+    util.date('12/27/93', 'America/Los_Angeles').should.equal('1993-12-27T08:00:00.000Z')
+
+    // EST
+    util.date('12/27/1993', 'America/New_York').should.equal('1993-12-27T05:00:00.000Z')
+    util.date('12/27/93 00:00', 'America/New_York').should.equal('1993-12-27T05:00:00.000Z')
   })
   it('should return a valid date from number', async () => {
     util.date(1000, 'America/New_York').should.equal('1970-01-01T00:00:01.000Z')
