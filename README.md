@@ -39,6 +39,8 @@ util.guid('Michael Scott', 'Birthday', null, 1993) // f8e61be1-0b1c-4e4f-81b6-05
 
 Stringifies all provided values and turns them into a lowercase slug. Null values are ignored.
 
+**Note:** This function will remove many characters, including non-english characters. Use with caution if you are using this for a unique ID.
+
 ```js
 util.slug('Michael Scott', 'Birthday', null, 1993) // michael-scott-birthday-1993
 ```
