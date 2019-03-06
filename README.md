@@ -59,6 +59,14 @@ Capitalizes the first word in the given value.
 
 Capitalizes every word in the given value.
 
+#### util.camelize(value)
+
+Camelcases the given value.
+
+#### util.decamelize(value)
+
+Converts camelcase to non-camelcase - separated by spaces.
+
 #### util.phone(value[, country])
 
 Normalizes any phone number in the world. Country is any three letter country code, defaulting to `'USA'`. If the number includes a country code, you do not need to provide a `country` argument.

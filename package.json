@@ -1,6 +1,6 @@
 {
   "name": "vandelay-util",
-  "version": "3.3.0",
+  "version": "3.4.0",
   "description": "Grab bag of utilities for vandelay transform functions",
   "main": "dist/index.js",
   "keywords": [],
@@ -172,8 +172,10 @@
     "@turf/turf": "^5.1.6",
     "aguid": "^2.0.0",
     "babel-runtime": "^6.3.19",
+    "camelcase": "^5.2.0",
     "capitalize": "^2.0.0",
     "convert-units": "^2.3.4",
+    "decamelize": "^2.0.0",
     "geo-tz": "^5.0.0",
     "is-sea": "^0.3.1",
     "lodash": "^4.17.4",
