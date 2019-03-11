@@ -1,6 +1,6 @@
 {
   "name": "vandelay-util",
-  "version": "3.4.0",
+  "version": "3.5.0",
   "description": "Grab bag of utilities for vandelay transform functions",
   "main": "dist/index.js",
   "keywords": [],
@@ -179,6 +179,7 @@
     "geo-tz": "^5.0.0",
     "is-sea": "^0.3.1",
     "lodash": "^4.17.4",
+    "moize": "^5.4.2",
     "moment-timezone": "^0.5.17",
     "numeral": "^2.0.6",
     "phone": "^2.2.0",

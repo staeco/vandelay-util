@@ -110,6 +110,26 @@ util.moment('12/27/1993') // moment object
 util.moment.tz('12/27/1993', 'America/New_York') // moment object
 ```
 
+#### util.memo(function)
+
+Exposes memoization helpers, with additional handling of null and invalid values. For a full usage guide, see [this page](https://github.com/planttheidea/moize#usage).
+
+```js
+// Fetch a request only once
+const getLocationData = util.memo.promise(async () =>
+  util.request('http://google.com/fetch-only-once.json')
+)
+
+// Cache synchronous computation
+const getTotal = util.memo((data) => {
+  return data
+    .map((i) => i.count)
+    .reduce((prev, curr) =>
+      prev + curr
+    , 0)
+})
+```
+
 #### util.date(value, timezone)
 
 Wrapper around moment.js `moment.tz(date, timezone)` that handles null and invalid values. Search timezones [here](https://momentjs.com/timezone/).
