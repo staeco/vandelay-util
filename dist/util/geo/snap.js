@@ -60,7 +60,7 @@ exports.default = async ({ type, path, optional }) => {
   let out;
   try {
     const { body } = await _superagent2.default.post(pelias.hosts.trace).retry(10).type('json').set('apikey', pelias.key).agent(agent).send(q);
-    out = _polyline2.default.toGeoJSON(body.trip.legs[0].shape);
+    out = _polyline2.default.toGeoJSON(body.trip.legs[0].shape, 6);
   } catch (err) {
     if (!optional) {
       if (err.response && err.response.body && err.response.body.error) {

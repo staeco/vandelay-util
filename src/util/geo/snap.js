@@ -46,7 +46,7 @@ export default async ({ type, path, optional }) => {
       .set('apikey', pelias.key)
       .agent(agent)
       .send(q)
-    out = polyline.toGeoJSON(body.trip.legs[0].shape)
+    out = polyline.toGeoJSON(body.trip.legs[0].shape, 6)
   } catch (err) {
     if (!optional) {
       if (err.response && err.response.body && err.response.body.error) {
