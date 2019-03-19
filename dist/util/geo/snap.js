@@ -16,6 +16,14 @@ var _quickLru2 = _interopRequireDefault(_quickLru);
 
 var _http = require('http');
 
+var _numeral = require('numeral');
+
+var _numeral2 = _interopRequireDefault(_numeral);
+
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const { pelias } = global.__vandelay_util_config;
@@ -29,6 +37,11 @@ const types = {
   bus: 'bus'
 };
 
+const encodePath = path => _lodash2.default.map(path.coordinates, i => ({
+  lon: (0, _numeral2.default)(i[0].toFixed(6)).value(), // Valhalla wants 6-digit precision
+  lat: (0, _numeral2.default)(i[1].toFixed(6)).value()
+}));
+
 exports.default = async ({ type, path, optional }) => {
   if (!pelias) throw new Error('Missing pelias configuration option (in geo.snap)');
   if (!types[type]) throw new Error(`Invalid type: ${type} (in geo.snap)`);
@@ -37,7 +50,7 @@ exports.default = async ({ type, path, optional }) => {
 
   const q = {
     costing: types[type],
-    encoded_polyline: _polyline2.default.fromGeoJSON(path)
+    shape: encodePath(path)
 
     // check if cache has it first
   };const lruKey = JSON.stringify(q);
@@ -46,7 +59,7 @@ exports.default = async ({ type, path, optional }) => {
   // not in cache, fetch it
   let out;
   try {
-    const { body } = await _superagent2.default.get(pelias.hosts.trace).retry(10).type('json').set('apikey', pelias.key).agent(agent).send(q);
+    const { body } = await _superagent2.default.post(pelias.hosts.trace).retry(10).type('json').set('apikey', pelias.key).agent(agent).send(q);
     out = _polyline2.default.toGeoJSON(body.trip.legs[0].shape);
   } catch (err) {
     if (!optional) {
