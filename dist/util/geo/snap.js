@@ -20,6 +20,10 @@ var _numeral = require('numeral');
 
 var _numeral2 = _interopRequireDefault(_numeral);
 
+var _simplify = require('./simplify');
+
+var _simplify2 = _interopRequireDefault(_simplify);
+
 var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
@@ -37,7 +41,7 @@ const types = {
   bus: 'bus'
 };
 
-const encodePath = path => _lodash2.default.map(path.coordinates, i => ({
+const encodePath = path => _lodash2.default.map((0, _simplify2.default)(path, { tolerance: 0.000001 }).coordinates, i => ({
   lon: (0, _numeral2.default)(i[0].toFixed(6)).value(), // Valhalla wants 6-digit precision
   lat: (0, _numeral2.default)(i[1].toFixed(6)).value()
 }));

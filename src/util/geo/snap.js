@@ -3,6 +3,7 @@ import polyline from '@mapbox/polyline'
 import QuickLRU from 'quick-lru'
 import { Agent } from 'http'
 import numeral from 'numeral'
+import simplify from './simplify'
 import _ from 'lodash'
 
 const { pelias } = global.__vandelay_util_config
@@ -16,7 +17,7 @@ const types = {
   bus: 'bus'
 }
 
-const encodePath = (path) => _.map(path.coordinates, (i) => ({
+const encodePath = (path) => _.map(simplify(path, { tolerance: 0.000001 }).coordinates, (i) => ({
   lon: numeral(i[0].toFixed(6)).value(), // Valhalla wants 6-digit precision
   lat: numeral(i[1].toFixed(6)).value()
 }))
