@@ -2,6 +2,7 @@ import request from 'superagent'
 import polyline from '@mapbox/polyline'
 import QuickLRU from 'quick-lru'
 import { Agent } from 'http'
+import geoPrecision from 'geojson-precision'
 
 const { pelias } = global.__vandelay_util_config
 const lru = new QuickLRU({ maxSize: 10000 })
@@ -14,6 +15,14 @@ const types = {
   bus: 'bus'
 }
 
+const encodePath = (path) => geoPrecision(path, 6) // Valhalla wants 6-digit precision
+  .coordinates
+  .map((i) => ({
+    lon: i[0],
+    lat: i[1]
+  }))
+
+
 export default async ({ type, path, optional }) => {
   if (!pelias) throw new Error('Missing pelias configuration option (in geo.snap)')
   if (!types[type]) throw new Error(`Invalid type: ${type} (in geo.snap)`)
@@ -22,7 +31,7 @@ export default async ({ type, path, optional }) => {
 
   const q = {
     costing: types[type],
-    encoded_polyline: polyline.fromGeoJSON(path)
+    shape: encodePath(path)
   }
 
   // check if cache has it first
@@ -32,13 +41,13 @@ export default async ({ type, path, optional }) => {
   // not in cache, fetch it
   let out
   try {
-    const { body } = await request.get(pelias.hosts.trace)
+    const { body } = await request.post(pelias.hosts.trace)
       .retry(10)
       .type('json')
       .set('apikey', pelias.key)
       .agent(agent)
       .send(q)
-    out = polyline.toGeoJSON(body.trip.legs[0].shape)
+    out = polyline.toGeoJSON(body.trip.legs[0].shape, 6)
   } catch (err) {
     if (!optional) {
       if (err.response && err.response.body && err.response.body.error) {
