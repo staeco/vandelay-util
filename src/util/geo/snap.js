@@ -2,9 +2,7 @@ import request from 'superagent'
 import polyline from '@mapbox/polyline'
 import QuickLRU from 'quick-lru'
 import { Agent } from 'http'
-import numeral from 'numeral'
-import simplify from './simplify'
-import _ from 'lodash'
+import geoPrecision from 'geojson-precision'
 
 const { pelias } = global.__vandelay_util_config
 const lru = new QuickLRU({ maxSize: 10000 })
@@ -17,10 +15,12 @@ const types = {
   bus: 'bus'
 }
 
-const encodePath = (path) => _.map(simplify(path, { tolerance: 0.000001 }).coordinates, (i) => ({
-  lon: numeral(i[0].toFixed(6)).value(), // Valhalla wants 6-digit precision
-  lat: numeral(i[1].toFixed(6)).value()
-}))
+const encodePath = (path) => geoPrecision(path, 6) // Valhalla wants 6-digit precision
+  .coordinates
+  .map((i) => ({
+    lon: i[0],
+    lat: i[1]
+  }))
 
 
 export default async ({ type, path, optional }) => {

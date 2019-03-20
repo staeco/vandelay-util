@@ -16,17 +16,9 @@ var _quickLru2 = _interopRequireDefault(_quickLru);
 
 var _http = require('http');
 
-var _numeral = require('numeral');
+var _geojsonPrecision = require('geojson-precision');
 
-var _numeral2 = _interopRequireDefault(_numeral);
-
-var _simplify = require('./simplify');
-
-var _simplify2 = _interopRequireDefault(_simplify);
-
-var _lodash = require('lodash');
-
-var _lodash2 = _interopRequireDefault(_lodash);
+var _geojsonPrecision2 = _interopRequireDefault(_geojsonPrecision);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -41,9 +33,10 @@ const types = {
   bus: 'bus'
 };
 
-const encodePath = path => _lodash2.default.map((0, _simplify2.default)(path, { tolerance: 0.000001 }).coordinates, i => ({
-  lon: (0, _numeral2.default)(i[0].toFixed(6)).value(), // Valhalla wants 6-digit precision
-  lat: (0, _numeral2.default)(i[1].toFixed(6)).value()
+const encodePath = path => (0, _geojsonPrecision2.default)(path, 6) // Valhalla wants 6-digit precision
+.coordinates.map(i => ({
+  lon: i[0],
+  lat: i[1]
 }));
 
 exports.default = async ({ type, path, optional }) => {
