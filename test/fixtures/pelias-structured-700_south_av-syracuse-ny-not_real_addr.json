@@ -1,0 +1,158 @@
+{
+  "geocoding" : {
+    "timestamp" : 1555110944871,
+    "attribution" : "https://stae.co",
+    "engine" : {
+      "author" : "Mapzen",
+      "name" : "Pelias",
+      "version" : "1.0"
+    },
+    "query" : {
+      "private" : false,
+      "parsed_text" : {
+        "number" : "700",
+        "street" : "SOUTH AV",
+        "city" : "syracuse",
+        "state" : "new york"
+      },
+      "size" : 10,
+      "lang" : {
+        "defaulted" : true,
+        "iso6391" : "en",
+        "iso6393" : "eng",
+        "name" : "English"
+      },
+      "querySize" : 20
+    },
+    "version" : "0.2"
+  },
+  "type" : "FeatureCollection",
+  "features" : [
+    {
+      "properties" : {
+        "localadmin" : "Syracuse",
+        "country_a" : "USA",
+        "country" : "United States",
+        "region_a" : "NY",
+        "region_gid" : "whosonfirst:region:85688543",
+        "gid" : "whosonfirst:locality:85977785",
+        "locality" : "Syracuse",
+        "match_type" : "fallback",
+        "label" : "Syracuse, NY, USA",
+        "locality_gid" : "whosonfirst:locality:85977785",
+        "continent" : "North America",
+        "localadmin_gid" : "whosonfirst:localadmin:404522851",
+        "name" : "Syracuse",
+        "continent_gid" : "whosonfirst:continent:102191575",
+        "layer" : "locality",
+        "source" : "whosonfirst",
+        "country_gid" : "whosonfirst:country:85633793",
+        "region" : "New York",
+        "id" : "85977785",
+        "source_id" : "85977785",
+        "accuracy" : "centroid",
+        "confidence" : 0.6
+      },
+      "bbox" : [
+        -76.204476,
+        42.984366,
+        -76.074084,
+        43.086102
+      ],
+      "geometry" : {
+        "coordinates" : [
+          -76.148211,
+          43.043536
+        ],
+        "type" : "Point"
+      },
+      "type" : "Feature"
+    },
+    {
+      "properties" : {
+        "match_type" : "fallback",
+        "continent" : "North America",
+        "label" : "North Syracuse, NY, USA",
+        "locality_gid" : "whosonfirst:locality:85977791",
+        "localadmin_gid" : "whosonfirst:localadmin:404522823",
+        "continent_gid" : "whosonfirst:continent:102191575",
+        "name" : "North Syracuse",
+        "source" : "whosonfirst",
+        "country_gid" : "whosonfirst:country:85633793",
+        "layer" : "locality",
+        "region" : "New York",
+        "id" : "85977791",
+        "source_id" : "85977791",
+        "accuracy" : "centroid",
+        "confidence" : 0.6,
+        "localadmin" : "Clay",
+        "country_a" : "USA",
+        "country" : "United States",
+        "region_a" : "NY",
+        "region_gid" : "whosonfirst:region:85688543",
+        "gid" : "whosonfirst:locality:85977791",
+        "locality" : "North Syracuse"
+      },
+      "type" : "Feature",
+      "bbox" : [
+        -76.148741,
+        43.122336,
+        -76.111514,
+        43.14506
+      ],
+      "geometry" : {
+        "type" : "Point",
+        "coordinates" : [
+          -76.130567,
+          43.132552
+        ]
+      }
+    },
+    {
+      "properties" : {
+        "region" : "New York",
+        "id" : "85977799",
+        "layer" : "locality",
+        "country_gid" : "whosonfirst:country:85633793",
+        "source" : "whosonfirst",
+        "name" : "East Syracuse",
+        "continent_gid" : "whosonfirst:continent:102191575",
+        "localadmin_gid" : "whosonfirst:localadmin:404521501",
+        "confidence" : 0.6,
+        "accuracy" : "centroid",
+        "source_id" : "85977799",
+        "match_type" : "fallback",
+        "locality_gid" : "whosonfirst:locality:85977799",
+        "label" : "East Syracuse, NY, USA",
+        "continent" : "North America",
+        "region_a" : "NY",
+        "country" : "United States",
+        "locality" : "East Syracuse",
+        "gid" : "whosonfirst:locality:85977799",
+        "region_gid" : "whosonfirst:region:85688543",
+        "localadmin" : "De Witt",
+        "country_a" : "USA"
+      },
+      "type" : "Feature",
+      "bbox" : [
+        -76.090354,
+        43.05552,
+        -76.051041,
+        43.071139
+      ],
+      "geometry" : {
+        "coordinates" : [
+          -76.069699,
+          43.063181
+        ],
+        "type" : "Point"
+      }
+    }
+  ],
+  "bbox" : [
+    -76.204476,
+    42.984366,
+    -76.051041,
+    43.14506
+  ]
+}

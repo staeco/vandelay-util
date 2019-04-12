@@ -1,0 +1,75 @@
+{
+  "bbox": [
+    -76.146974,
+    43.044696,
+    -76.146974,
+    43.044696
+  ],
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -76.146974,
+          43.044696
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "accuracy": "point",
+        "confidence": 1,
+        "continent": "North America",
+        "continent_gid": "whosonfirst:continent:102191575",
+        "country": "United States",
+        "country_a": "USA",
+        "country_gid": "whosonfirst:country:85633793",
+        "gid": "openaddresses:address:us/ny/statewide:da0a2a4739e598bd",
+        "housenumber": "401",
+        "id": "us/ny/statewide:da0a2a4739e598bd",
+        "label": "401 Harrison Street, Syracuse, NY, USA",
+        "layer": "address",
+        "localadmin": "Syracuse",
+        "localadmin_gid": "whosonfirst:localadmin:404522851",
+        "locality": "Syracuse",
+        "locality_gid": "whosonfirst:locality:85977785",
+        "match_type": "exact",
+        "name": "401 Harrison Street",
+        "postalcode": "13202",
+        "region": "New York",
+        "region_a": "NY",
+        "region_gid": "whosonfirst:region:85688543",
+        "source": "openaddresses",
+        "source_id": "us/ny/statewide:da0a2a4739e598bd",
+        "street": "Harrison Street"
+      },
+      "type": "Feature"
+    }
+  ],
+  "geocoding": {
+    "attribution": "https://stae.co",
+    "engine": {
+      "author": "Mapzen",
+      "name": "Pelias",
+      "version": "1.0"
+    },
+    "query": {
+      "lang": {
+        "defaulted": true,
+        "iso6391": "en",
+        "iso6393": "eng",
+        "name": "English"
+      },
+      "parsed_text": {
+        "city": "syracuse",
+        "number": "401",
+        "state": "new york",
+        "street": "Harrison St"
+      },
+      "private": false,
+      "querySize": 20,
+      "size": 10
+    },
+    "timestamp": 1555110975486,
+    "version": "0.2"
+  },
+  "type": "FeatureCollection"
+}
