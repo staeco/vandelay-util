@@ -12,7 +12,7 @@ const wayLru = new QuickLRU({ maxSize: 8000 })
 
 const agent = new Agent({ keepAlive: true })
 
-const locateCity = async ({ city, region, country }) => {
+const locateCity = async ({ city, region, country, minConfidence }) => {
   const query = {
     text: `${city}, ${region} ${country}`,
     size: 1
@@ -24,7 +24,8 @@ const locateCity = async ({ city, region, country }) => {
 
   const opts = {
     query,
-    host: pelias.hosts.search
+    host: pelias.hosts.search,
+    minConfidence
   }
   // not in cache, fetch it
   const out = await handleQuery(opts)

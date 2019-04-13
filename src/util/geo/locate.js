@@ -4,7 +4,7 @@ import handleQuery from '../../lib/pelias'
 const { pelias } = global.__vandelay_util_config
 const lru = new QuickLRU({ maxSize: 10000 })
 
-export default async ({ address, city, region, country }) => {
+export default async ({ address, city, region, country, minConfidence }) => {
   if (!address) throw new Error('Missing address text (in geo.locate)')
   const query = {
     locality: city,
@@ -19,7 +19,8 @@ export default async ({ address, city, region, country }) => {
 
   const opts = {
     query,
-    host: pelias.hosts.structured
+    host: pelias.hosts.structured,
+    minConfidence
   }
 
   // not in cache, fetch it
