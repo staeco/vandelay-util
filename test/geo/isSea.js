@@ -4,7 +4,8 @@ import createUtil from '../../src/util'
 
 const util = createUtil()
 
-describe('geo#isSea', () => {
+describe('geo#isSea', function () {
+  this.timeout(4000)
   it('should exist', async () => {
     should.exist(util.geo.isSea)
     should.equal(typeof util.geo.isSea, 'function')
