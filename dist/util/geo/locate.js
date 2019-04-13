@@ -15,7 +15,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const { pelias } = global.__vandelay_util_config;
 const lru = new _quickLru2.default({ maxSize: 10000 });
 
-exports.default = async ({ address, city, region, country }) => {
+exports.default = async ({ address, city, region, country, minConfidence }) => {
   if (!address) throw new Error('Missing address text (in geo.locate)');
   const query = {
     locality: city,
@@ -29,7 +29,8 @@ exports.default = async ({ address, city, region, country }) => {
 
   const opts = {
     query,
-    host: pelias.hosts.structured
+    host: pelias.hosts.structured,
+    minConfidence
 
     // not in cache, fetch it
   };const out = await (0, _pelias2.default)(opts);

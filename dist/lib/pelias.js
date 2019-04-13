@@ -15,29 +15,29 @@ const agent = new _http.Agent({ keepAlive: true });
 
 const makeRequest = async opts => _superagent2.default.get(opts.host).retry(10).type('json').agent(agent).set('apikey', pelias.key).query(opts.query);
 
-const parseResponse = body => {
-  const res = body.features[0];
-  return {
-    type: res.geometry.type,
-    coordinates: res.geometry.coordinates,
-    bbox: res.bbox,
-    properties: {
-      short: res.properties.name,
-      full: res.properties.label,
-      city: res.properties.locality,
-      county: res.properties.county,
-      region: res.properties.region,
-      country: res.properties.country
-    }
-  };
-};
+const parseResponse = ([res]) => ({
+  type: res.geometry.type,
+  coordinates: res.geometry.coordinates,
+  bbox: res.bbox,
+  properties: {
+    short: res.properties.name,
+    full: res.properties.label,
+    city: res.properties.locality,
+    county: res.properties.county,
+    region: res.properties.region,
+    country: res.properties.country
+  }
+});
 
-const handleQuery = async opts => {
+const handleQuery = async ({ host, query, minConfidence = 0.9 }) => {
+  const { pelias } = global.__vandelay_util_config;
   if (!pelias) throw new Error('Missing pelias configuration option (in geo.locate)');
   try {
-    const { body } = await makeRequest(opts);
+    const { body } = await makeRequest({ host, query });
     if (!body || !body.features || !body.features[0]) return;
-    return parseResponse(body);
+    const features = body.features.filter(f => f.properties.confidence >= minConfidence); // filter by confidence
+    if (!features[0]) return; // if there are no features, confidence was too low
+    return parseResponse(features);
   } catch (err) {
     throw new Error(`${err.message || err} (in geo.locate)`);
   }

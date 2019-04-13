@@ -36,7 +36,7 @@ const wayLru = new _quickLru2.default({ maxSize: 8000 });
 
 const agent = new _http.Agent({ keepAlive: true });
 
-const locateCity = async ({ city, region, country }) => {
+const locateCity = async ({ city, region, country, minConfidence }) => {
   const query = {
     text: `${city}, ${region} ${country}`,
     size: 1
@@ -47,7 +47,8 @@ const locateCity = async ({ city, region, country }) => {
 
   const opts = {
     query,
-    host: pelias.hosts.search
+    host: pelias.hosts.search,
+    minConfidence
     // not in cache, fetch it
   };const out = await (0, _pelias2.default)(opts);
   if (!out) return;
