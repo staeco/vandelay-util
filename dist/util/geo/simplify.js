@@ -24,7 +24,7 @@ exports.default = (geometry, { tolerance = 0.00001 } = {}) => {
   if (type === 'LineString' && coordinates.length === 2 && (0, _lodash.isEqual)(coordinates[0], coordinates[1])) {
     throw new Error('Invalid LineString! Only two coordinates that are identical.');
   }
-  const res = (0, _turf.simplify)(geometry, { tolerance });
+  const res = (0, _turf.simplify)((0, _turf.cleanCoords)((0, _turf.truncate)(geometry, { precision: 6, coordinates: 3 })), { tolerance });
   return Object.assign({
     type
   }, rest, {
