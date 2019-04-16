@@ -1,0 +1,153 @@
+{
+  "trip": {
+    "language": "en-US",
+    "status": 0,
+    "units": "kilometers",
+    "status_message": "Found route between points",
+    "legs": [
+      {
+        "shape": "c|wxlAbsj`lCzG_TlEgNjAgDjAwDtDyLp]ogApBqGwDyBk`@iWaBkAyB{AoXaRyHuEif@s[mP{K}TeOgg@a\\yf@c\\qb@eYeUgOcu@af@iB{AwCkB}d@sZ{i@o^cf@q[if@s[ac@uY_C{AkBkAab@iXqf@a\\if@s[cf@s[uc@wX}EwCiBbGyGlTgJtYoNtd@sAdEkAvDsZfaAsGnSkFtPiL|^oJtYqLl_@iHjU}T~r@qGnSsAdE{AdFiGnR{[dcAm@jBm@xBoHlUyMva@}Ntd@aC~H{`@roAm@hBe@zAg^|hAyAbFaC`HkBbGu^xiAu@xB{@xC_^lhAqBpGcBrFgNfc@{F`RoIfXoNfc@uIhXuJdZkL|]yGnSqCzB_DfCkAjAqGdFsGrFqAjAeKnIgTbQsd@z_@ig@hb@ifA|}@m^dYyf@_]{e@c[ud@eZqf@s[if@s[{e@q\\ui@_]wh@c\\ce@a\\yf@c\\ke@c[{e@q[{e@s[yf@s[gb@wXsBkA{@hCcBrF",
+        "summary": {
+          "max_lon": -73.935822,
+          "max_lat": 40.825199,
+          "time": 531,
+          "length": 5.341,
+          "min_lat": 40.791573,
+          "min_lon": -73.958252
+        },
+        "maneuvers": [
+          {
+            "travel_mode": "drive",
+            "begin_shape_index": 0,
+            "length": 0.22,
+            "time": 34,
+            "type": 1,
+            "end_shape_index": 7,
+            "instruction": "Drive southeast on East 106th Street.",
+            "verbal_pre_transition_instruction": "Drive southeast on East 1 06th Street for 200 meters.",
+            "travel_type": "car",
+            "street_names": [
+              "East 106th Street"
+            ]
+          },
+          {
+            "travel_type": "car",
+            "travel_mode": "drive",
+            "verbal_pre_transition_instruction": "Turn left onto 3rd Avenue.",
+            "verbal_transition_alert_instruction": "Turn left onto 3rd Avenue.",
+            "length": 1.546,
+            "instruction": "Turn left onto 3rd Avenue.",
+            "end_shape_index": 36,
+            "type": 15,
+            "time": 106,
+            "verbal_post_transition_instruction": "Continue for 1.5 kilometers.",
+            "street_names": [
+              "3rd Avenue"
+            ],
+            "begin_shape_index": 7
+          },
+          {
+            "travel_type": "car",
+            "travel_mode": "drive",
+            "verbal_pre_transition_instruction": "Turn left onto East 1 25th Street.",
+            "verbal_transition_alert_instruction": "Turn left onto East 1 25th Street.",
+            "length": 0.296,
+            "instruction": "Turn left onto East 125th Street.",
+            "end_shape_index": 44,
+            "type": 15,
+            "time": 43,
+            "verbal_post_transition_instruction": "Continue for 300 meters.",
+            "street_names": [
+              "East 125th Street"
+            ],
+            "begin_shape_index": 36
+          },
+          {
+            "travel_type": "car",
+            "travel_mode": "drive",
+            "verbal_pre_transition_instruction": "Continue on Dr. Martin Luther King, Jr. Boulevard for 2.1 kilometers.",
+            "begin_street_names": [
+              "East 125th Street",
+              "Dr. Martin Luther King, Jr. Boulevard"
+            ],
+            "verbal_transition_alert_instruction": "Continue on Dr. Martin Luther King, Jr. Boulevard.",
+            "length": 2.059,
+            "instruction": "Continue on Dr. Martin Luther King, Jr. Boulevard.",
+            "end_shape_index": 94,
+            "type": 8,
+            "time": 255,
+            "street_names": [
+              "Dr. Martin Luther King, Jr. Boulevard"
+            ],
+            "begin_shape_index": 44
+          },
+          {
+            "travel_type": "car",
+            "travel_mode": "drive",
+            "verbal_pre_transition_instruction": "Turn right onto Broadway.",
+            "verbal_transition_alert_instruction": "Turn right onto Broadway.",
+            "length": 1.202,
+            "instruction": "Turn right onto Broadway.",
+            "end_shape_index": 110,
+            "type": 10,
+            "time": 91,
+            "verbal_post_transition_instruction": "Continue for 1.2 kilometers.",
+            "street_names": [
+              "Broadway"
+            ],
+            "begin_shape_index": 94
+          },
+          {
+            "travel_type": "car",
+            "travel_mode": "drive",
+            "verbal_pre_transition_instruction": "Turn left. Then You will arrive at your destination.",
+            "verbal_transition_alert_instruction": "Turn left.",
+            "length": 0.018,
+            "instruction": "Turn left.",
+            "end_shape_index": 112,
+            "type": 15,
+            "time": 2,
+            "verbal_multi_cue": true,
+            "verbal_post_transition_instruction": "Continue for 20 meters.",
+            "begin_shape_index": 110
+          },
+          {
+            "travel_type": "car",
+            "travel_mode": "drive",
+            "begin_shape_index": 112,
+            "time": 0,
+            "type": 4,
+            "end_shape_index": 112,
+            "instruction": "You have arrived at your destination.",
+            "length": 0,
+            "verbal_transition_alert_instruction": "You will arrive at your destination.",
+            "verbal_pre_transition_instruction": "You have arrived at your destination."
+          }
+        ]
+      }
+    ],
+    "summary": {
+      "max_lon": -73.935822,
+      "max_lat": 40.825199,
+      "time": 531,
+      "length": 5.341,
+      "min_lat": 40.791573,
+      "min_lon": -73.958252
+    },
+    "locations": [
+      {
+        "original_index": 0,
+        "lon": -73.94693,
+        "lat": 40.792553,
+        "type": "break"
+      },
+      {
+        "original_index": 1,
+        "lon": -73.951569,
+        "lat": 40.825161,
+        "type": "break"
+      }
+    ]
+  }
+}
+

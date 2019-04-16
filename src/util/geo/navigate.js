@@ -2,6 +2,7 @@ import request from 'superagent'
 import polyline from '@mapbox/polyline'
 import QuickLRU from 'quick-lru'
 import { Agent } from 'http'
+import geoPrecision from 'geojson-precision'
 
 const { pelias } = global.__vandelay_util_config
 const lru = new QuickLRU({ maxSize: 10000 })
@@ -23,16 +24,19 @@ export default async ({ type, start, end, optional }) => {
   if (start.type !== 'Point') throw new Error('Invalid start type, expected Point (in geo.navigate)')
   if (end.type !== 'Point') throw new Error('Invalid end type, expected Point (in geo.navigate)')
 
+  const startPoint = geoPrecision(start, 6) // set fixed precision as Valhalla can be picky
+  const endPoint = geoPrecision(end, 6)
+
   const path = {
     type: 'LineString',
-    coordinates: [ start.coordinates, end.coordinates ]
+    coordinates: [ startPoint.coordinates, endPoint.coordinates ]
   }
   const q = {
     json: JSON.stringify({
       costing: types[type],
       locations: [
-        { lat: start.coordinates[1], lon: start.coordinates[0] },
-        { lat: end.coordinates[1], lon: end.coordinates[0] }
+        { lat: startPoint.coordinates[1], lon: startPoint.coordinates[0] },
+        { lat: endPoint.coordinates[1], lon: endPoint.coordinates[0] }
       ]
     })
   }
@@ -49,7 +53,7 @@ export default async ({ type, start, end, optional }) => {
       .type('json')
       .agent(agent)
       .query(q)
-    out = polyline.toGeoJSON(body.trip.legs[0].shape)
+    out = polyline.toGeoJSON(body.trip.legs[0].shape, 6) // decode using Valhalla's fixed precision
   } catch (err) {
     if (!optional) {
       if (err.response && err.response.body && err.response.body.error) {
