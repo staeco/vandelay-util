@@ -29,6 +29,12 @@ const wrap = (lam) => (req, res) => {
   return lam(req, res)
 }
 
+export const cleanupUtil = () => {
+  Object.keys(require.cache)
+    .filter((m) => m.includes('src/util') || m.includes('src/lib'))
+    .map((m) => delete require.cache[m]) // remove from cache so they can be initialized properly
+}
+
 export default async (responses) => {
   const port = await getPort()
   const app = express()
@@ -36,12 +42,10 @@ export default async (responses) => {
     if (responses.structured) app.get(structuredURL, wrap(responses.structured))
     if (responses.trace) console.log('TRACE NOT IMPLEMENTED!')
     if (responses.search) console.log('SEARCH NOT IMPLEMENTED!')
-    if (responses.route) console.log('ROUTE NOT IMPLEMENTED!')
+    if (responses.route) app.get(routeURL, wrap(responses.route))
   }
   const server = app.listen(port)
-  Object.keys(require.cache)
-    .filter((m) => m.includes('src/util') || m.includes('src/lib'))
-    .map((m) => delete require.cache[m]) // remove from cache so they can be initialized properly
+  cleanupUtil()
   const util = createUtil({ pelias: getPeliasConfig(port) })
   util.close = () => server.close()
   return util
