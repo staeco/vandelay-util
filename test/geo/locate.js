@@ -7,7 +7,7 @@ import harrisonStRealAddr from '../fixtures/pelias-structured-401_harrison_st-sy
 let util
 
 describe('geo#locate', function () {
-  afterEach('cleanup util', () => util && util.close())
+  afterEach('cleanup util', () => util && util.close && util.close())
   it('should exist', async () => {
     const util = await bootstrapUtil()
     should.exist(util.geo.locate)
