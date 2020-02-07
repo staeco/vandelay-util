@@ -226,7 +226,7 @@ util.geo.intersection({
   country: 'USA'
 })
 
-#### util.geo.locate({ address, city, region, country })
+#### util.geo.locate({ address, city, region, postalCode, country })
 #### util.geo.search({ text })
 #### util.geo.snap({ type, path, optional })
 #### util.geo.navigate({ type, start, end, optional })
