@@ -15,10 +15,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const { pelias } = global.__vandelay_util_config;
 const lru = new _quickLru2.default({ maxSize: 10000 });
 
-exports.default = async ({ address, city, region, country, minConfidence }) => {
+exports.default = async ({ address, city, region, postalCode, country, minConfidence }) => {
   if (!address) throw new Error('Missing address text (in geo.locate)');
   const query = {
     locality: city,
+    postalcode: postalCode,
     region,
     country,
     address
