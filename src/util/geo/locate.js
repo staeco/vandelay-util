@@ -4,10 +4,11 @@ import handleQuery from '../../lib/pelias'
 const { pelias } = global.__vandelay_util_config
 const lru = new QuickLRU({ maxSize: 10000 })
 
-export default async ({ address, city, region, country, minConfidence }) => {
+export default async ({ address, city, region, postalCode, country, minConfidence }) => {
   if (!address) throw new Error('Missing address text (in geo.locate)')
   const query = {
     locality: city,
+    postalcode: postalCode,
     region,
     country,
     address

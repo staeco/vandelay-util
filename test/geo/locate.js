@@ -37,16 +37,22 @@ describe('geo#locate', function () {
         should.deepEqual(req.query, {
           address: '401 Harrison St',
           locality: 'syracuse',
-          region: 'new york'
+          region: 'new york',
+          postalcode: '13202',
+          country: 'United States'
         }, 'Request should generate proper query for input values')
         res.json(harrisonStRealAddr) //lazy, I know, but it works
       }
     })
+
     const loc = await util.geo.locate({
       address: '401 Harrison St',
       city: 'syracuse',
-      region: 'new york'
+      region: 'new york',
+      postalCode: '13202',
+      country: 'United States'
     })
+
     should.deepEqual(loc, {
       type: 'Point',
       coordinates: [ -76.146974, 43.044696 ],
@@ -55,6 +61,7 @@ describe('geo#locate', function () {
         short: '401 Harrison Street',
         full: '401 Harrison Street, Syracuse, NY, USA',
         city: 'Syracuse',
+        postalCode: '13202',
         county: undefined,
         region: 'New York',
         country: 'United States'

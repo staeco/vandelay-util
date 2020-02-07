@@ -21,6 +21,7 @@ const parseResponse = ([ res ]) => ({
     city: res.properties.locality,
     county: res.properties.county,
     region: res.properties.region,
+    postalCode: res.properties.postalcode,
     country: res.properties.country
   }
 })
