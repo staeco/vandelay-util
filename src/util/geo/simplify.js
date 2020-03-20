@@ -1,4 +1,4 @@
-import { simplify, truncate, cleanCoords } from '@turf/turf'
+import { simplify, truncate } from '@turf/turf'
 import { isEqual } from 'lodash'
 
 // 1 = 69 miles
@@ -16,9 +16,8 @@ export default (geometry, { tolerance=0.00001 }={}) => {
   if (type === 'LineString' && coordinates.length === 2 && isEqual(coordinates[0], coordinates[1])) {
     throw new Error('Invalid LineString! Only two coordinates that are identical.')
   }
-  const res = simplify(
-    cleanCoords(truncate(geometry, { precision: 6, coordinates: 3 }))
-    , { tolerance })
+  const res = simplify(truncate(geometry, { precision: 6, coordinates: 3 }), { tolerance })
+
   return {
     type,
     ...rest,
