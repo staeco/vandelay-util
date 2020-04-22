@@ -1,6 +1,6 @@
 {
   "name": "vandelay-util",
-  "version": "3.9.1",
+  "version": "3.9.3",
   "description": "Grab bag of utilities for vandelay transform functions",
   "main": "dist/index.js",
   "keywords": [],
@@ -176,7 +176,7 @@
     "@turf/turf": "^5.1.6",
     "aguid": "^2.0.0",
     "babel-runtime": "^6.3.19",
-    "camelcase": "^5.2.0",
+    "camelcase": "^6.0.0",
     "capitalize": "^2.0.0",
     "convert-units": "^2.3.4",
     "decamelize": "^4.0.0",
@@ -193,6 +193,6 @@
     "simplify-geojson": "^1.0.3",
     "superagent": "^5.0.0",
     "validator": "^13.0.0",
-    "wkx": "^0.4.5"
+    "wkx": "^0.5.0"
   }
 }
