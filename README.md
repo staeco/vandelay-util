@@ -140,7 +140,7 @@ util.date(null, 'America/Los_Angeles') // undefined
 util.date('12/27/1993', 'America/New_York') // 1993-12-27T05:00:00.000Z
 ```
 
-### util.number(value)
+#### util.number(value)
 
 Wrapper around number parsing that handles null and invalid values.
 
@@ -246,6 +246,10 @@ Exposes [validator](https://github.com/chriso/validator.js#validators) with no m
 #### util.request
 
 Exposes [superagent](https://visionmedia.github.io/superagent/) with no modifications.
+
+#### util.sdk
+
+Exposes [stae js-sdk](https://github.com/staeco-js-sdk) with no modifications.
 
 [downloads-image]: http://img.shields.io/npm/dm/vandelay-util.svg
 [npm-url]: https://npmjs.org/package/vandelay-util
