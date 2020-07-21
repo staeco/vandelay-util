@@ -1,5 +1,4 @@
 import request from 'superagent'
-import QuickLRU from 'quick-lru'
 import capitalize from '../capitalize'
 import handleQuery from '../../lib/pelias'
 import * as turf from '@turf/turf'
@@ -7,9 +6,6 @@ import { Agent } from 'http'
 import { trim, uniq, flatten, intersection as findIntersection } from 'lodash'
 
 const { pelias } = global.__vandelay_util_config
-const cityLru = new QuickLRU({ maxSize: 1000 })
-const wayLru = new QuickLRU({ maxSize: 8000 })
-
 const agent = new Agent({ keepAlive: true })
 
 const locateCity = async ({ city, region, country, minConfidence }) => {
@@ -17,22 +13,12 @@ const locateCity = async ({ city, region, country, minConfidence }) => {
     text: `${city}, ${region} ${country}`,
     size: 1
   }
-
-  // check if cache has it first
-  const lruKey = JSON.stringify(query)
-  if (cityLru.has(lruKey)) return cityLru.get(lruKey)
-
   const opts = {
     query,
     host: pelias.hosts.search,
     minConfidence
   }
-  // not in cache, fetch it
-  const out = await handleQuery(opts)
-  if (!out) return
-  // put it in cache for later
-  cityLru.set(lruKey, out)
-  return out
+  return handleQuery(opts)
 }
 
 const runOverpassQuery = async (query) => {
@@ -51,10 +37,7 @@ const locateWay = async ({ street, bbox }) => {
   const query = `way
       ["name"~"${capitalize.words(street)}"]
       (${bbox[1]}, ${bbox[0]}, ${bbox[3]}, ${bbox[2]});`
-  if (wayLru.has(query)) return wayLru.get(query)
-  const out = runOverpassQuery(query)
-  wayLru.set(query, out)
-  return out
+  return runOverpassQuery(query)
 }
 
 const lookupNodeId = async (nodeId) => {

@@ -1,11 +1,9 @@
 import request from 'superagent'
 import polyline from '@mapbox/polyline'
-import QuickLRU from 'quick-lru'
 import { Agent } from 'http'
 import geoPrecision from 'geojson-precision'
 
 const { pelias } = global.__vandelay_util_config
-const lru = new QuickLRU({ maxSize: 10000 })
 const agent = new Agent({ keepAlive: true })
 
 const types = {
@@ -34,10 +32,6 @@ export default async ({ type, path, optional }) => {
     shape: encodePath(path)
   }
 
-  // check if cache has it first
-  const lruKey = JSON.stringify(q)
-  if (lru.has(lruKey)) return lru.get(lruKey)
-
   // not in cache, fetch it
   let out
   try {
@@ -57,8 +51,5 @@ export default async ({ type, path, optional }) => {
     }
   }
   if (!out && optional) out = path
-
-  // put it in cache for later
-  lru.set(lruKey, out)
   return out
 }

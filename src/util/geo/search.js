@@ -1,10 +1,8 @@
 import request from 'superagent'
-import QuickLRU from 'quick-lru'
 import { Agent } from 'http'
 
 const { pelias } = global.__vandelay_util_config
 const agent = new Agent({ keepAlive: true })
-const lru = new QuickLRU({ maxSize: 10000 })
 
 const makeRequest = (opts) =>
   request.get(opts.host)
@@ -47,18 +45,8 @@ export default async ({ text }) => {
   if (!text) throw new Error('Missing address text (in geo.search)')
   const query = { text }
 
-  const lruKey = JSON.stringify(query)
-  if (lru.has(lruKey)) return lru.get(lruKey)
-
-  const opts = {
+  return handleQuery({
     query,
     host: pelias.hosts.search
-  }
-
-  const out = handleQuery(opts)
-
-  if (!out) return
-  // put it in cache for later
-  lru.set(lruKey, out)
-  return out
+  })
 }

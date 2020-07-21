@@ -6,10 +6,6 @@ var _superagent = require('superagent');
 
 var _superagent2 = _interopRequireDefault(_superagent);
 
-var _quickLru = require('quick-lru');
-
-var _quickLru2 = _interopRequireDefault(_quickLru);
-
 var _capitalize = require('../capitalize');
 
 var _capitalize2 = _interopRequireDefault(_capitalize);
@@ -31,30 +27,19 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const { pelias } = global.__vandelay_util_config;
-const cityLru = new _quickLru2.default({ maxSize: 1000 });
-const wayLru = new _quickLru2.default({ maxSize: 8000 });
-
 const agent = new _http.Agent({ keepAlive: true });
 
 const locateCity = async ({ city, region, country, minConfidence }) => {
   const query = {
     text: `${city}, ${region} ${country}`,
     size: 1
-
-    // check if cache has it first
-  };const lruKey = JSON.stringify(query);
-  if (cityLru.has(lruKey)) return cityLru.get(lruKey);
-
+  };
   const opts = {
     query,
     host: pelias.hosts.search,
     minConfidence
-    // not in cache, fetch it
-  };const out = await (0, _pelias2.default)(opts);
-  if (!out) return;
-  // put it in cache for later
-  cityLru.set(lruKey, out);
-  return out;
+  };
+  return (0, _pelias2.default)(opts);
 };
 
 const runOverpassQuery = async query => {
@@ -69,10 +54,7 @@ const locateWay = async ({ street, bbox }) => {
   const query = `way
       ["name"~"${_capitalize2.default.words(street)}"]
       (${bbox[1]}, ${bbox[0]}, ${bbox[3]}, ${bbox[2]});`;
-  if (wayLru.has(query)) return wayLru.get(query);
-  const out = runOverpassQuery(query);
-  wayLru.set(query, out);
-  return out;
+  return runOverpassQuery(query);
 };
 
 const lookupNodeId = async nodeId => {
