@@ -8,10 +8,11 @@ import { trim, uniq, flatten, intersection as findIntersection } from 'lodash'
 const { pelias } = global.__vandelay_util_config
 const agent = new Agent({ keepAlive: true })
 
-const locateCity = async ({ city, region, country, minConfidence }) => {
+const locateCity = async ({ city, region, country, sources, minConfidence }) => {
   const query = {
     text: `${city}, ${region} ${country}`,
-    size: 1
+    size: 1,
+    sources: sources ? sources.join(',') : undefined
   }
   const opts = {
     query,

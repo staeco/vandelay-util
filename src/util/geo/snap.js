@@ -21,7 +21,7 @@ const encodePath = (path) => geoPrecision(path, 6) // Valhalla wants 6-digit pre
   }))
 
 
-export default async ({ type, path, optional }) => {
+export default async ({ type, path, optional, sources }) => {
   if (!pelias) throw new Error('Missing pelias configuration option (in geo.snap)')
   if (!types[type]) throw new Error(`Invalid type: ${type} (in geo.snap)`)
   if (!path || !path.coordinates) throw new Error('Missing path (in geo.snap)')
@@ -29,7 +29,8 @@ export default async ({ type, path, optional }) => {
 
   const q = {
     costing: types[type],
-    shape: encodePath(path)
+    shape: encodePath(path),
+    sources: sources ? sources.join(',') : undefined
   }
 
   // not in cache, fetch it

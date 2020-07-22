@@ -40,10 +40,13 @@ const handleQuery = async (opts) => {
   }
 }
 
-export default async ({ text }) => {
+export default async ({ text, sources }) => {
   if (!pelias) throw new Error('Missing pelias configuration option (in geo.search)')
   if (!text) throw new Error('Missing address text (in geo.search)')
-  const query = { text }
+  const query = {
+    text,
+    sources: sources ? sources.join(',') : undefined
+  }
 
   return handleQuery({
     query,

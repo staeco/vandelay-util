@@ -29,7 +29,7 @@ const types = {
   any: 'multimodal'
 };
 
-exports.default = async ({ type, start, end, optional }) => {
+exports.default = async ({ type, start, end, optional, sources }) => {
   if (!pelias) throw new Error('Missing pelias configuration option (in geo.navigate)');
   if (!types[type]) throw new Error(`Invalid type: ${type} (in geo.navigate)`);
   if (!start || !start.coordinates) throw new Error('Missing start coordinates (in geo.navigate)');
@@ -48,7 +48,8 @@ exports.default = async ({ type, start, end, optional }) => {
     json: JSON.stringify({
       costing: types[type],
       locations: [{ lat: startPoint.coordinates[1], lon: startPoint.coordinates[0] }, { lat: endPoint.coordinates[1], lon: endPoint.coordinates[0] }]
-    })
+    }),
+    sources: sources ? sources.join(',') : undefined
     // not in cache, fetch it
   };let out;
   try {

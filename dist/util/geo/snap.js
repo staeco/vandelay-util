@@ -34,7 +34,7 @@ const encodePath = path => (0, _geojsonPrecision2.default)(path, 6) // Valhalla 
   lat: i[1]
 }));
 
-exports.default = async ({ type, path, optional }) => {
+exports.default = async ({ type, path, optional, sources }) => {
   if (!pelias) throw new Error('Missing pelias configuration option (in geo.snap)');
   if (!types[type]) throw new Error(`Invalid type: ${type} (in geo.snap)`);
   if (!path || !path.coordinates) throw new Error('Missing path (in geo.snap)');
@@ -42,7 +42,8 @@ exports.default = async ({ type, path, optional }) => {
 
   const q = {
     costing: types[type],
-    shape: encodePath(path)
+    shape: encodePath(path),
+    sources: sources ? sources.join(',') : undefined
 
     // not in cache, fetch it
   };let out;

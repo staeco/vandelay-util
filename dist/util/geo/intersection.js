@@ -29,10 +29,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const { pelias } = global.__vandelay_util_config;
 const agent = new _http.Agent({ keepAlive: true });
 
-const locateCity = async ({ city, region, country, minConfidence }) => {
+const locateCity = async ({ city, region, country, sources, minConfidence }) => {
   const query = {
     text: `${city}, ${region} ${country}`,
-    size: 1
+    size: 1,
+    sources: sources ? sources.join(',') : undefined
   };
   const opts = {
     query,
