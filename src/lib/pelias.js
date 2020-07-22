@@ -26,17 +26,18 @@ const parseResponse = ([ res ]) => ({
   }
 })
 
-const handleQuery = async ({ host, query, minConfidence = 0.9 }) => {
+const handleQuery = async ({ debugName, host, query, filter, minConfidence = 0.9 }) => {
   const { pelias } = global.__vandelay_util_config
-  if (!pelias) throw new Error('Missing pelias configuration option (in geo.locate)')
+  if (!pelias) throw new Error(`Missing pelias configuration option (in ${debugName})`)
   try {
     const { body } = await makeRequest({ host, query })
-    if (!body || !body.features || !body.features[0]) return
-    const features = body.features.filter((f) => f.properties.confidence >= minConfidence) // filter by confidence
-    if (!features[0]) return // if there are no features, confidence was too low
+    if (!body || !body.features || body.features.length === 0) return
+    let features = body.features.filter((f) => f.properties.confidence >= minConfidence) // filter by confidence
+    if (filter) features = features.filter(filter)
+    if (features.length === 0) return // nothing passed the filters!
     return parseResponse(features)
   } catch (err) {
-    throw new Error(`${err.message || err} (in geo.locate)`)
+    throw new Error(`${err.message || err} (in ${debugName})`)
   }
 }
 

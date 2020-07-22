@@ -212,6 +212,7 @@ util.geo.wk2JSON('POINT(1 2)') // { type: 'Point', coordinates: [1, 2] }
 
 Returns a geopoint for an intersection. For example:
 
+```js
 util.geo.intersection({
   intersection: '12th Ave./Hammond St.',
   city: 'Lost Wages',
@@ -225,9 +226,10 @@ util.geo.intersection({
   region: 'NV',
   country: 'USA'
 })
+```
 
-#### util.geo.locate({ address, city, region, postalCode, country, sources })
-#### util.geo.search({ text, sources })
+#### util.geo.locate({ address, city, region, postalCode, country, minConfidence, filter, sources, layers })
+#### util.geo.search({ text, minConfidence, filter, sources, layers })
 #### util.geo.snap({ type, path, optional, sources })
 #### util.geo.navigate({ type, start, end, optional, sources })
 

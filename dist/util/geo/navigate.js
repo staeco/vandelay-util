@@ -50,8 +50,9 @@ exports.default = async ({ type, start, end, optional, sources }) => {
       locations: [{ lat: startPoint.coordinates[1], lon: startPoint.coordinates[0] }, { lat: endPoint.coordinates[1], lon: endPoint.coordinates[0] }]
     }),
     sources: sources ? sources.join(',') : undefined
-    // not in cache, fetch it
-  };let out;
+  };
+
+  let out;
   try {
     const { body } = await _superagent2.default.get(pelias.hosts.route).retry(10).set('apikey', pelias.key).type('json').agent(agent).query(q);
     out = _polyline2.default.toGeoJSON(body.trip.legs[0].shape, 6); // decode using Valhalla's fixed precision

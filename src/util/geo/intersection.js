@@ -8,16 +8,16 @@ import { trim, uniq, flatten, intersection as findIntersection } from 'lodash'
 const { pelias } = global.__vandelay_util_config
 const agent = new Agent({ keepAlive: true })
 
-const locateCity = async ({ city, region, country, sources, minConfidence }) => {
+const locateCity = async ({ city, region, country, sources }) => {
   const query = {
     text: `${city}, ${region} ${country}`,
     size: 1,
+    layers: 'coarse', // anything but address and vanue
     sources: sources ? sources.join(',') : undefined
   }
   const opts = {
     query,
-    host: pelias.hosts.search,
-    minConfidence
+    host: pelias.hosts.search
   }
   return handleQuery(opts)
 }
@@ -48,9 +48,9 @@ const lookupNodeId = async (nodeId) => {
 
 const intersectionSplitExp = /[/,]/
 
-export default async ({ intersection, city, region, country }) => {
+export default async ({ intersection, city, region, country, sources }) => {
   if (!pelias) throw new Error('Missing pelias configuration option (in geo.locate)')
-  const { bbox } = await locateCity({ city, region, country }) //get city's bounding box
+  const { bbox } = await locateCity({ city, region, country, sources }) // get city's bounding box
 
   // use bounding box in searches
   const streets = intersection.split(intersectionSplitExp).map(trim) // split street intersections on forward slash and comma

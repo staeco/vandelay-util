@@ -1,6 +1,6 @@
 {
   "name": "vandelay-util",
-  "version": "3.10.0",
+  "version": "3.11.0",
   "description": "Grab bag of utilities for vandelay transform functions",
   "main": "dist/index.js",
   "keywords": [],

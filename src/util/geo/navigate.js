@@ -39,7 +39,7 @@ export default async ({ type, start, end, optional, sources }) => {
     }),
     sources: sources ? sources.join(',') : undefined
   }
-  // not in cache, fetch it
+
   let out
   try {
     const { body } = await request.get(pelias.hosts.route)
