@@ -290,3 +290,21 @@ Exposes [stae js-sdk](https://github.com/staeco-js-sdk) with no modifications.
 
 [travis-url]: https://travis-ci.org/staeco/vandelay-util
 [travis-image]: https://travis-ci.org/staeco/vandelay-util.png?branch=master
+
+## Development
+
+### Running Tests
+
+In order to execute tests against network services, ensure the environment variable `VANDELAY_UTIL_CONFIG` contains the path to a javascript or json file with the required configuration.
+
+You can do so by adding the following to your `~/.bashrc`:
+
+```sh
+export VANDELAY_UTIL_CONFIG="/home/gilbates/git/van-config/config.js"
+```
+
+When you wish for the tests to utilize the network services configured in `${VANDELAY_UTIL_CONFIG}`, define the variable `USE_NET=true` like so:
+
+```sh
+USE_NET=true npm test
+```

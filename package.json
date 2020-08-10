@@ -25,8 +25,8 @@
     "clean": "rimraf dist",
     "lint": "eslint src test",
     "lint:fix": "eslint src test --fix",
-    "test": "mocha --require babel-register --recursive --reporter spec && npm run-script lint",
-    "test:debug": "mocha --inspect-brk=0.0.0.0 --require babel-register --recursive --reporter spec"
+    "test": "mocha --require babel-register --recursive --reporter spec --exit && npm run-script lint",
+    "test:debug": "mocha --inspect-brk=0.0.0.0 --require babel-register --recursive --reporter spec --exit"
   },
   "devDependencies": {
     "babel-cli": "^6.4.0",
