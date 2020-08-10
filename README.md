@@ -172,6 +172,37 @@ util.geo.tz({
 }) // Asia/Shanghai
 ```
 
+#### util.geo.reproject(geojson[, sourceProjection])
+
+Parses GeoJSON and reprojects it into WGS84. If the GeoJSON has a `crs` attribute it will auto-detect it, otherwise you can specify it as the second argument.
+
+```js
+// Auto-detection based on the input data
+util.geo.reproject({
+  type: 'Point',
+  crs: {
+    type: 'name',
+    properties: {
+      name: 'EPSG:3006'
+    }
+  },
+  coordinates: [
+    319180,
+    6399862
+  ]
+}) // { type: 'Point', coordinates: [ 11.965261850066433, 57.704505637111694 ] }
+
+
+// Manually specifying it, any EPSG code or URN is acceptable
+util.geo.tz({
+  type: 'Point',
+  coordinates: [
+    319180,
+    6399862
+  ]
+}, 'EPSG:3006') // { type: 'Point', coordinates: [ 11.965261850066433, 57.704505637111694 ] }
+```
+
 #### util.geo.multi(value)
 
 Converts any given GeoJSON geometry to a `Multi` version. Values that are already a `Multi` geometry will be returned with no modifications.
