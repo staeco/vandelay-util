@@ -194,7 +194,7 @@ util.geo.reproject({
 
 
 // Manually specifying it, any EPSG code or URN is acceptable
-util.geo.tz({
+util.geo.reproject({
   type: 'Point',
   coordinates: [
     319180,
