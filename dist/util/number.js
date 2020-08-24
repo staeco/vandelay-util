@@ -1,16 +1,16 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
+exports.default = void 0;
 
-var _numeral = require('numeral');
-
-var _numeral2 = _interopRequireDefault(_numeral);
+var _numeral = _interopRequireDefault(require("numeral"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = v => {
+var _default = v => {
   if (v == null) return;
-  return (0, _numeral2.default)(v).value();
+  return (0, _numeral.default)(v).value();
 };
 
+exports.default = _default;
 module.exports = exports.default;

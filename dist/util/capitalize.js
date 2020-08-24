@@ -1,20 +1,22 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
+exports.default = void 0;
 
-var _capitalize = require('capitalize');
-
-var _capitalize2 = _interopRequireDefault(_capitalize);
+var _capitalize = _interopRequireDefault(require("capitalize"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const cap = v => {
   if (v == null) return;
-  return (0, _capitalize2.default)(String(v));
+  return (0, _capitalize.default)(String(v));
 };
+
 cap.words = v => {
   if (v == null) return;
-  return _capitalize2.default.words(String(v));
+  return _capitalize.default.words(String(v));
 };
-exports.default = cap;
+
+var _default = cap;
+exports.default = _default;
 module.exports = exports.default;

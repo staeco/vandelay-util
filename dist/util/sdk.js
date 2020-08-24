@@ -1,12 +1,12 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
+exports.default = void 0;
 
-var _stae = require('stae');
-
-var _stae2 = _interopRequireDefault(_stae);
+var _stae = _interopRequireDefault(require("stae"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = _stae2.default;
+var _default = _stae.default;
+exports.default = _default;
 module.exports = exports.default;

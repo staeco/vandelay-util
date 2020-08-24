@@ -1,24 +1,30 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
+exports.default = void 0;
 
-var _pelias = require('../../lib/pelias');
-
-var _pelias2 = _interopRequireDefault(_pelias);
+var _pelias = _interopRequireDefault(require("../../lib/pelias"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const { pelias } = global.__vandelay_util_config;
+const {
+  pelias
+} = global.__vandelay_util_config;
 
-exports.default = async ({ text, sources, layers, filter, minConfidence }) => {
+var _default = async ({
+  text,
+  sources,
+  layers,
+  filter,
+  minConfidence
+}) => {
   if (!text) throw new Error('Missing address text (in geo.search)');
   const query = {
     text,
     layers: layers ? layers.join(',') : undefined,
     sources: sources ? sources.join(',') : undefined
   };
-
-  return (0, _pelias2.default)({
+  return (0, _pelias.default)({
     debugName: 'geo.search',
     query,
     filter,
@@ -27,4 +33,5 @@ exports.default = async ({ text, sources, layers, filter, minConfidence }) => {
   });
 };
 
+exports.default = _default;
 module.exports = exports.default;

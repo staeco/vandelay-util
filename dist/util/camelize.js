@@ -1,16 +1,16 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
+exports.default = void 0;
 
-var _camelcase = require('camelcase');
-
-var _camelcase2 = _interopRequireDefault(_camelcase);
+var _camelcase = _interopRequireDefault(require("camelcase"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = v => {
+var _default = v => {
   if (v == null) return;
-  return (0, _camelcase2.default)(String(v));
+  return (0, _camelcase.default)(String(v));
 };
 
+exports.default = _default;
 module.exports = exports.default;

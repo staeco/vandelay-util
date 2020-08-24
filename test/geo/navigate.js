@@ -5,7 +5,7 @@ import correctNavResponse from '../fixtures/navigation-test-correctly-decoded-re
 
 let util
 
-describe('geo#navigate', function () {
+describe('geo#navigate', () => {
   afterEach('cleanup util', () => util && util.close && util.close())
   it('should exist', async () => {
     const util = await bootstrapUtil()
@@ -17,28 +17,28 @@ describe('geo#navigate', function () {
       route: (req, res) => {
         const request = JSON.parse(req.query.json)
         should.notDeepEqual(request, {
-          'costing': 'auto',
-          'locations': [
+          costing: 'auto',
+          locations: [
             {
-              'lat': 40.79255294799805,
-              'lon': -73.94692993164062
+              lat: 40.79255294799805,
+              lon: -73.94692993164062
             },
             {
-              'lat': 40.82516098022461,
-              'lon': -73.95156860351562
+              lat: 40.82516098022461,
+              lon: -73.95156860351562
             }
           ]
         })
         should(request).deepEqual({ // assert fixed 6-digit precision
-          'costing': 'auto',
-          'locations': [
+          costing: 'auto',
+          locations: [
             {
-              'lat': 40.792553,
-              'lon': -73.94693
+              lat: 40.792553,
+              lon: -73.94693
             },
             {
-              'lat': 40.825161,
-              'lon': -73.951569
+              lat: 40.825161,
+              lon: -73.951569
             }
           ]
         })
