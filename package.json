@@ -24,7 +24,7 @@
     "build": "babel src --out-dir dist",
     "clean": "rimraf dist",
     "lint": "eslint src test --fix",
-    "test": "mocha --require @babel/register --recursive --reporter spec && npm run-script lint",
+    "test": "mocha --require @babel/register --recursive --reporter spec",
     "test:debug": "mocha --inspect-brk=0.0.0.0 --require @babel/register --recursive --reporter spec"
   },
   "devDependencies": {
