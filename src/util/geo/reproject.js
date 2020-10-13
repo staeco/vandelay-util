@@ -16,6 +16,7 @@ export default (geojson, crs) => {
     : geojson
   if (!toParse.crs) throw new Error('Missing CRS! Must be defined in either the input object or provided as an argument.')
   const geom = Geometry.fromGeoJson(toParse)
+  if (!geom) throw new Error('Invalid geometry in reproject!')
   geom.transformTo(wgs84)
   const obj = geom.toObject()
   if (!geojson.properties) return obj

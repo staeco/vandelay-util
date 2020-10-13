@@ -26,6 +26,7 @@ var _default = (geojson, crs) => {
 
   const geom = _gdalNext.Geometry.fromGeoJson(toParse);
 
+  if (!geom) throw new Error('Invalid geometry in reproject!');
   geom.transformTo(wgs84);
   const obj = geom.toObject();
   if (!geojson.properties) return obj;
