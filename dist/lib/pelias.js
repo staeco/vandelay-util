@@ -45,6 +45,10 @@ const handleQuery = async ({
   } = global.__vandelay_util_config;
   if (!pelias) throw new Error(`Missing pelias configuration option (in ${debugName})`);
 
+  function _ref(f) {
+    return f.properties.confidence >= minConfidence;
+  }
+
   try {
     const {
       body
@@ -53,7 +57,7 @@ const handleQuery = async ({
       query
     });
     if (!body || !body.features || body.features.length === 0) return;
-    let features = body.features.filter(f => f.properties.confidence >= minConfidence); // filter by confidence
+    let features = body.features.filter(_ref); // filter by confidence
 
     if (filter) features = features.filter(filter);
     if (features.length === 0) return; // nothing passed the filters!

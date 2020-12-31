@@ -54,7 +54,7 @@ const runOverpassQuery = async query => {
   out body;`;
   const {
     body
-  } = await _superagent.default.post('http://overpass-api.de/api/interpreter').send(qs).retry(10).agent(agent);
+  } = await _superagent.default.post('https://overpass-api.de/api/interpreter').send(qs).retry(10).agent(agent);
   return body;
 };
 
@@ -76,6 +76,10 @@ const lookupNodeId = async nodeId => {
 };
 
 const intersectionSplitExp = /[/,]/;
+
+function _ref(e) {
+  return e.nodes;
+}
 
 var _default = async ({
   intersection,
@@ -102,7 +106,7 @@ var _default = async ({
       street,
       bbox
     });
-    return (0, _lodash.uniq)((0, _lodash.flatten)(way.elements.map(e => e.nodes)));
+    return (0, _lodash.uniq)((0, _lodash.flatten)(way.elements.map(_ref)));
   }));
   const intersectionNodeId = (0, _lodash.intersection)(waysData[0], waysData[1]);
   const node = await lookupNodeId(intersectionNodeId);

@@ -27,7 +27,7 @@ const runOverpassQuery = async (query) => {
     ${query}
   out body;`
   const { body } = await request
-    .post('http://overpass-api.de/api/interpreter')
+    .post('https://overpass-api.de/api/interpreter')
     .send(qs)
     .retry(10)
     .agent(agent)

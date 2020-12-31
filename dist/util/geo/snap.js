@@ -26,11 +26,15 @@ const types = {
   bus: 'bus'
 };
 
+function _ref(i) {
+  return {
+    lon: i[0],
+    lat: i[1]
+  };
+}
+
 const encodePath = path => (0, _geojsonPrecision.default)(path, 6) // Valhalla wants 6-digit precision
-.coordinates.map(i => ({
-  lon: i[0],
-  lat: i[1]
-}));
+.coordinates.map(_ref);
 
 var _default = async ({
   type,
