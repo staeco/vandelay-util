@@ -2,17 +2,22 @@ import request from 'superagent'
 import capitalize from '../capitalize'
 import handleQuery from '../../lib/pelias'
 import * as turf from '@turf/turf'
-import { Agent } from 'http'
 import { trim, uniq, flatten, intersection as findIntersection } from 'lodash'
 
 const { pelias } = global.__vandelay_util_config
-const agent = new Agent({ keepAlive: true })
 
-const locateCity = async ({ city, region, country, sources }) => {
+// make sure geonames isnt used! https://github.com/pelias/pelias/issues/326
+const defaultSources = [
+  'whosonfirst',
+  'openstreetmap',
+  'openaddresses'
+]
+const locateCity = async ({ city, region, sources }) => {
+  // specifying country here returns bad results
   const query = {
-    text: `${city}, ${region} ${country}`,
+    text: `${city}, ${region}`,
     size: 1,
-    layers: 'coarse', // anything but address and vanue
+    layers: 'coarse', // anything but address and venue
     sources: sources ? sources.join(',') : undefined
   }
   const opts = {
@@ -30,7 +35,6 @@ const runOverpassQuery = async (query) => {
     .post('https://overpass-api.de/api/interpreter')
     .send(qs)
     .retry(10)
-    .agent(agent)
   return body
 }
 
@@ -48,14 +52,16 @@ const lookupNodeId = async (nodeId) => {
 
 const intersectionSplitExp = /[/,]/
 
-export default async ({ intersection, city, region, country, sources }) => {
+export default async ({ intersection, city, region, sources = defaultSources }) => {
   if (!pelias) throw new Error('Missing pelias configuration option (in geo.locate)')
-  const { bbox } = await locateCity({ city, region, country, sources }) // get city's bounding box
+  const cityRes = await locateCity({ city, region, sources }) // get city's bounding box
+
+  if (!cityRes) return null // couldn't locate city
 
   // use bounding box in searches
   const streets = intersection.split(intersectionSplitExp).map(trim) // split street intersections on forward slash and comma
   const waysData = await Promise.all(streets.map(async (street) => {
-    const way = await locateWay({ street, bbox })
+    const way = await locateWay({ street, bbox: cityRes.bbox })
     return uniq(flatten(way.elements.map((e) => e.nodes)))
   }))
   const intersectionNodeId = findIntersection(waysData[0], waysData[1])

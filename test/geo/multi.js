@@ -1,19 +1,19 @@
 /*eslint no-console: 0*/
 import should from 'should'
-import createUtil from '../../src/util'
+import createUtil from '../helpers/createUtil'
 
 const util = createUtil()
 
 describe('geo#multi', () => {
-  it('should exist', async () => {
+  it('should exist', () => {
     should.exist(util.geo.multi)
     should.equal(typeof util.geo.multi, 'function')
   })
-  it('should return undefined given no args', async () => {
+  it('should return undefined given no args', () => {
     should.not.exist(util.geo.multi())
     should.not.exist(util.geo.multi(null))
   })
-  it('should work with polygon', async () => {
+  it('should work with polygon', () => {
     const src = {
       type: 'Polygon',
       coordinates: [
@@ -28,7 +28,7 @@ describe('geo#multi', () => {
     util.geo.multi(src).should.eql(expected)
     util.geo.multi(expected).should.eql(expected)
   })
-  it('should work with linestring', async () => {
+  it('should work with linestring', () => {
     const src = {
       type: 'LineString',
       coordinates: [

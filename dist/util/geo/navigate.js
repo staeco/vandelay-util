@@ -7,8 +7,6 @@ var _superagent = _interopRequireDefault(require("superagent"));
 
 var _polyline = _interopRequireDefault(require("@mapbox/polyline"));
 
-var _http = require("http");
-
 var _geojsonPrecision = _interopRequireDefault(require("geojson-precision"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -16,9 +14,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const {
   pelias
 } = global.__vandelay_util_config;
-const agent = new _http.Agent({
-  keepAlive: true
-});
 const types = {
   driving: 'auto',
   walking: 'pedestrian',
@@ -65,7 +60,7 @@ var _default = async ({
   try {
     const {
       body
-    } = await _superagent.default.get(pelias.hosts.route).retry(10).set('apikey', pelias.key).type('json').agent(agent).query(q);
+    } = await _superagent.default.get(pelias.hosts.route).retry(10).set('apikey', pelias.key).type('json').query(q);
     out = _polyline.default.toGeoJSON(body.trip.legs[0].shape, 6); // decode using Valhalla's fixed precision
   } catch (err) {
     if (!optional) {

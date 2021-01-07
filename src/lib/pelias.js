@@ -1,13 +1,10 @@
 import request from 'superagent'
-import { Agent } from 'http'
 
 const { pelias } = global.__vandelay_util_config
-const agent = new Agent({ keepAlive: true })
 
 const makeRequest = async (opts) => request.get(opts.host)
   .retry(10)
   .type('json')
-  .agent(agent)
   .set('apikey', pelias.key)
   .query(opts.query)
 

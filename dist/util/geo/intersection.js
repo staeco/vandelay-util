@@ -11,8 +11,6 @@ var _pelias = _interopRequireDefault(require("../../lib/pelias"));
 
 var turf = _interopRequireWildcard(require("@turf/turf"));
 
-var _http = require("http");
-
 var _lodash = require("lodash");
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
@@ -23,22 +21,21 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 const {
   pelias
-} = global.__vandelay_util_config;
-const agent = new _http.Agent({
-  keepAlive: true
-});
+} = global.__vandelay_util_config; // make sure geonames isnt used! https://github.com/pelias/pelias/issues/326
+
+const defaultSources = ['whosonfirst', 'openstreetmap', 'openaddresses'];
 
 const locateCity = async ({
   city,
   region,
-  country,
   sources
 }) => {
+  // specifying country here returns bad results
   const query = {
-    text: `${city}, ${region} ${country}`,
+    text: `${city}, ${region}`,
     size: 1,
     layers: 'coarse',
-    // anything but address and vanue
+    // anything but address and venue
     sources: sources ? sources.join(',') : undefined
   };
   const opts = {
@@ -54,7 +51,7 @@ const runOverpassQuery = async query => {
   out body;`;
   const {
     body
-  } = await _superagent.default.post('https://overpass-api.de/api/interpreter').send(qs).retry(10).agent(agent);
+  } = await _superagent.default.post('https://overpass-api.de/api/interpreter').send(qs).retry(10);
   return body;
 };
 
@@ -85,18 +82,16 @@ var _default = async ({
   intersection,
   city,
   region,
-  country,
-  sources
+  sources = defaultSources
 }) => {
   if (!pelias) throw new Error('Missing pelias configuration option (in geo.locate)');
-  const {
-    bbox
-  } = await locateCity({
+  const cityRes = await locateCity({
     city,
     region,
-    country,
     sources
   }); // get city's bounding box
+
+  if (!cityRes) return null; // couldn't locate city
   // use bounding box in searches
 
   const streets = intersection.split(intersectionSplitExp).map(_lodash.trim); // split street intersections on forward slash and comma
@@ -104,7 +99,7 @@ var _default = async ({
   const waysData = await Promise.all(streets.map(async street => {
     const way = await locateWay({
       street,
-      bbox
+      bbox: cityRes.bbox
     });
     return (0, _lodash.uniq)((0, _lodash.flatten)(way.elements.map(_ref)));
   }));

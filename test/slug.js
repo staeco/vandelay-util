@@ -1,6 +1,6 @@
 /*eslint no-console: 0*/
 import should from 'should'
-import createUtil from '../src/util'
+import createUtil from './helpers/createUtil'
 
 const util = createUtil()
 

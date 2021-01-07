@@ -1,10 +1,8 @@
 import request from 'superagent'
 import polyline from '@mapbox/polyline'
-import { Agent } from 'http'
 import geoPrecision from 'geojson-precision'
 
 const { pelias } = global.__vandelay_util_config
-const agent = new Agent({ keepAlive: true })
 
 const types = {
   driving: 'auto',
@@ -40,7 +38,6 @@ export default async ({ type, path, optional, sources }) => {
       .retry(10)
       .type('json')
       .set('apikey', pelias.key)
-      .agent(agent)
       .send(q)
     out = polyline.toGeoJSON(body.trip.legs[0].shape, 6)
   } catch (err) {

@@ -1,6 +1,6 @@
 /*eslint no-console: 0*/
 import should from 'should'
-import createUtil from '../../src/util'
+import createUtil from '../helpers/createUtil'
 
 const util = createUtil()
 const expected = {
@@ -14,13 +14,12 @@ const expected = {
   ]
 }
 
-describe('geo#reproject', function () {
-  this.timeout(4000)
-  it('should exist', async () => {
+describe('geo#reproject', () => {
+  it('should exist', () => {
     should.exist(util.geo.reproject)
     should.equal(typeof util.geo.reproject, 'function')
   })
-  it('should reproject correctly auto-detecting crs', async () => {
+  it('should reproject correctly auto-detecting crs', () => {
     util.geo.reproject({
       type: 'Point',
       crs: {
@@ -38,7 +37,7 @@ describe('geo#reproject', function () {
       ]
     }).should.eql(expected)
   })
-  it('should reproject correctly with manual crs', async () => {
+  it('should reproject correctly with manual crs', () => {
     util.geo.reproject({
       type: 'Point',
       properties: {

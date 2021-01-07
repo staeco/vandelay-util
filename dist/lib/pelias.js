@@ -5,18 +5,13 @@ exports.default = void 0;
 
 var _superagent = _interopRequireDefault(require("superagent"));
 
-var _http = require("http");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const {
   pelias
 } = global.__vandelay_util_config;
-const agent = new _http.Agent({
-  keepAlive: true
-});
 
-const makeRequest = async opts => _superagent.default.get(opts.host).retry(10).type('json').agent(agent).set('apikey', pelias.key).query(opts.query);
+const makeRequest = async opts => _superagent.default.get(opts.host).retry(10).type('json').set('apikey', pelias.key).query(opts.query);
 
 const parseResponse = ([res]) => ({
   type: res.geometry.type,

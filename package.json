@@ -1,6 +1,6 @@
 {
   "name": "vandelay-util",
-  "version": "3.12.3",
+  "version": "3.13.0",
   "description": "Grab bag of utilities for vandelay transform functions",
   "main": "dist/index.js",
   "keywords": [],
@@ -24,18 +24,15 @@
     "build": "babel src --out-dir dist",
     "clean": "rimraf dist",
     "lint": "eslint src test --fix",
-    "test": "mocha --require @babel/register --recursive --reporter spec --exit",
-    "test:debug": "mocha --inspect-brk=0.0.0.0 --require @babel/register --recursive --reporter spec"
+    "test": "mocha --require @babel/register --recursive --reporter spec --exit --timeout 30000",
+    "test:debug": "mocha --inspect-brk=0.0.0.0 --require @babel/register --recursive --reporter spec --timeout 30000"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",
     "@babel/register": "^7.10.5",
     "@stae/babel-node": "^1.0.3",
     "@stae/linters": "^1.0.1",
-    "express": "^4.16.4",
-    "get-port": "^5.0.0",
     "mocha": "^8.0.0",
-    "rewire": "^5.0.0",
     "rimraf": "^3.0.0",
     "should": "^13.0.0"
   },
@@ -52,7 +49,7 @@
     "gdal-next": "^2.0.0",
     "geo-tz": "^6.0.0",
     "geojson-precision": "^1.0.0",
-    "is-sea": "github:stevelacy/is-sea#sl/deps-1",
+    "is-sea": "github:contra/is-sea",
     "lodash": "^4.17.4",
     "moize": "^5.4.2",
     "moment-timezone": "^0.5.17",
