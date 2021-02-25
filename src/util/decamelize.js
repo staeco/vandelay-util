@@ -1,6 +1,6 @@
 import decamelize from 'decamelize'
 
-export default (v) => {
+export default (v, separator = ' ') => {
   if (v == null) return
-  return decamelize(String(v), ' ')
+  return decamelize(String(v), { separator })
 }

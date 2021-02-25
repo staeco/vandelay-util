@@ -7,9 +7,11 @@ var _decamelize = _interopRequireDefault(require("decamelize"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _default = v => {
+var _default = (v, separator = ' ') => {
   if (v == null) return;
-  return (0, _decamelize.default)(String(v), ' ');
+  return (0, _decamelize.default)(String(v), {
+    separator
+  });
 };
 
 exports.default = _default;
