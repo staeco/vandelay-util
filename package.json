@@ -1,6 +1,6 @@
 {
   "name": "vandelay-util",
-  "version": "3.14.0",
+  "version": "3.14.1",
   "description": "Grab bag of utilities for vandelay transform functions",
   "main": "dist/index.js",
   "keywords": [],
@@ -41,7 +41,6 @@
     "@sindresorhus/slugify": "^1.0.0",
     "@turf/turf": "^6.0.0",
     "aguid": "^2.0.0",
-    "babel-runtime": "^6.3.19",
     "camelcase": "^6.0.0",
     "capitalize": "^2.0.0",
     "convert-units": "^2.3.4",
