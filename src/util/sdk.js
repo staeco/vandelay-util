@@ -1,3 +1,1 @@
-import stae from 'stae'
-
-export default stae
+export * from 'stae'

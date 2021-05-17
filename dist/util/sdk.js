@@ -1,12 +1,11 @@
 "use strict";
 
 exports.__esModule = true;
-exports.default = void 0;
 
-var _stae = _interopRequireDefault(require("stae"));
+var _stae = require("stae");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _default = _stae.default;
-exports.default = _default;
-module.exports = exports.default;
+Object.keys(_stae).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (key in exports && exports[key] === _stae[key]) return;
+  exports[key] = _stae[key];
+});
