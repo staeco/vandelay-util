@@ -217,6 +217,19 @@ util.geo.multi({
 })
 ```
 
+#### util.geo.pointArray({ longitude, latitude, elevation })
+
+Never worry about getting the order of parameters in a GeoJSON point array wrong again. Returns a properly formed GeoJSON array for use in a point.
+
+Returns null if either longitude or latitude is missing. If elevation is null, it is simply ignored.
+
+```js
+{
+  type: 'Point',
+  coordinates: util.geo.pointArray({ longitude: -112.052790, latitude: 33.505195, elevation: null })
+}
+```
+
 #### util.geo.simplify(value)
 
 Simplifies any given GeoJSON geometry to the precision of a meter. Values that do not need simplification will be returned with no modifications.
