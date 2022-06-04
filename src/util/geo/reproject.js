@@ -1,4 +1,4 @@
-import { SpatialReference, Geometry } from 'gdal-next'
+import { SpatialReference, Geometry } from 'gdal-async'
 
 const wgs84 = SpatialReference.fromProj4('+init=epsg:4326')
 

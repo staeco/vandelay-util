@@ -1,6 +1,6 @@
 {
   "name": "vandelay-util",
-  "version": "3.14.2",
+  "version": "3.15.0",
   "description": "Grab bag of utilities for vandelay transform functions",
   "main": "dist/index.js",
   "keywords": [],
@@ -32,7 +32,7 @@
     "@babel/register": "^7.10.5",
     "@stae/babel-node": "^1.0.3",
     "@stae/linters": "^1.0.1",
-    "mocha": "^8.0.0",
+    "mocha": "^10.0.0",
     "rimraf": "^3.0.0",
     "should": "^13.0.0"
   },
@@ -45,8 +45,8 @@
     "capitalize": "^2.0.0",
     "convert-units": "^2.3.4",
     "decamelize": "^5.0.0",
-    "gdal-next": "^2.0.0",
-    "geo-tz": "^6.0.0",
+    "gdal-async": "^3.0.0",
+    "geo-tz": "^7.0.0",
     "geojson-precision": "^1.0.0",
     "is-sea": "github:contra/is-sea",
     "lodash": "^4.17.4",
@@ -57,7 +57,7 @@
     "require-dir": "^1.0.0",
     "simplify-geojson": "^1.0.3",
     "stae": "^2.1.0",
-    "superagent": "^6.0.0",
+    "superagent": "^7.0.0",
     "validator": "^13.0.0",
     "wkx": "^0.5.0"
   }

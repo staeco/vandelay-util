@@ -3,15 +3,13 @@
 exports.__esModule = true;
 exports.default = void 0;
 
-var _geoTz = _interopRequireDefault(require("geo-tz"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _geoTz = require("geo-tz");
 
 // switch to lon, lat for consistency with geojson
 var _default = o => {
   const [lon, lat] = o.coordinates || o;
   if (lon == null || lat == null) throw new Error('Missing coordinates');
-  const zones = (0, _geoTz.default)(lat, lon);
+  const zones = (0, _geoTz.find)(lat, lon);
   return zones && zones[0];
 };
 

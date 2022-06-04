@@ -3,9 +3,9 @@
 exports.__esModule = true;
 exports.default = void 0;
 
-var _gdalNext = require("gdal-next");
+var _gdalAsync = require("gdal-async");
 
-const wgs84 = _gdalNext.SpatialReference.fromProj4('+init=epsg:4326');
+const wgs84 = _gdalAsync.SpatialReference.fromProj4('+init=epsg:4326');
 
 var _default = (geojson, crs) => {
   const toParse = crs ? {
@@ -19,7 +19,7 @@ var _default = (geojson, crs) => {
   } : geojson;
   if (!toParse.crs) throw new Error('Missing CRS! Must be defined in either the input object or provided as an argument.');
 
-  const geom = _gdalNext.Geometry.fromGeoJson(toParse);
+  const geom = _gdalAsync.Geometry.fromGeoJson(toParse);
 
   if (!geom) throw new Error('Invalid geometry in reproject!');
   geom.transformTo(wgs84);
