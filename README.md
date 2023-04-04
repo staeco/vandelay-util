@@ -117,7 +117,7 @@ Exposes memoization helpers, with additional handling of null and invalid values
 ```js
 // Fetch a request only once
 const getLocationData = util.memo.promise(async () =>
-  util.request('http://google.com/fetch-only-once.json')
+  util.request.get('http://google.com/fetch-only-once.json')
 )
 
 // Cache synchronous computation
